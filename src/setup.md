@@ -7,7 +7,7 @@ installed on your machine. Once that's installed you'll need to get the `wasm32-
 toolchain.
 
 ```bash
-$ rustup target add wasm32-unknown-unknown --toolchain nightly
+$ rustup target add wasm32-unknown-unknown
 ```
 
 Next up if you're interested in making small wasm binaries you'll want to
