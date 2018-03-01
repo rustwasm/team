@@ -3,7 +3,7 @@
 A basic "hello world" can be generated with:
 
 ```
-$ cargo +nightly new hello-world
+$ cargo new hello-world
 ```
 
 Next up change `Cargo.toml` to have:
@@ -25,7 +25,7 @@ pub extern fn add_one(a: u32) -> u32 {
 Now prepare the wasm binary with:
 
 ```
-$ cargo +nightly build --target wasm32-unknown-unknown --release
+$ cargo build --target wasm32-unknown-unknown --release
 
 # make the binary a little smaller (working around bugs in rustc toolchain)
 $ wasm-gc target/wasm32-unknown-unknown/release/hello_world.wasm -o hello_world.gc.wasm
