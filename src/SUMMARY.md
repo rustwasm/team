@@ -7,3 +7,5 @@
 - [Tools](./tools.md)
 - [Workflows](./workflows.md)
 - [JavaScript Interoperation](./js-ffi.md)
+
+- Round 2: Testing highfive bot. This should be rejected.
