@@ -75,7 +75,7 @@ Alternatively, if you are running locally without any webserver.
 
 If you have Python 3 installed, you can alternatively serve this file with Python's built 
 in web server from `localhost`. Python's web server cannot serve `instantiateStreaming` or 
-`compileStreaming`, however, due to its lack of support for the `application/wasm` MIME type.
+`compileStreaming` due to its lack of support for the `application/wasm` MIME type.
 
 ```
 $ python3 -m http.server
