@@ -53,13 +53,6 @@ And we can test it out with:
 
 Note: To run with `instantiateStreaming` and `compileStreaming`, you need your webserver to serve `.wasm` file with `application/wasm` MIME type. The [https](https://github.com/thecoshman/http) crate can be used to serve files from `localhost`, and includes the `application/wasm` MIME type out of the box.
 
-If you have Python 3 installed, you can alternatively serve the file using Python's built in
-HTTP server.
-
-```
-$ python3 -m http.server
-```
-
 Alternatively, if you are running locally without any webserver.
 
 ```html
@@ -77,4 +70,12 @@ Alternatively, if you are running locally without any webserver.
   </head>
   <body></body>
 </html>
+```
+
+If you have Python 3 installed, you can alternatively serve this file with Python's built 
+in web server. Python's web server cannot serve `instantiateStreaming` or `compileStreaming`,
+however, due to its lack of support for the `application/wasm` MIME type.
+
+```
+$ python3 -m http.server
 ```
