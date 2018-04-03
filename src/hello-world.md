@@ -27,7 +27,8 @@ Now prepare the wasm binary with:
 ```
 $ cargo +nightly build --target wasm32-unknown-unknown --release
 
-# make the binary a little smaller (working around bugs in rustc toolchain)
+# make the binary smaller by removing all unneeded exports, imports, and functions 
+# (working around bugs in rustc toolchain)
 $ wasm-gc target/wasm32-unknown-unknown/release/hello_world.wasm -o hello_world.gc.wasm
 
 # make the binary *even smaller* if you installed `wasm-opt`
@@ -79,3 +80,13 @@ however, due to its lack of support for the `application/wasm` MIME type.
 ```
 $ python3 -m http.server
 ```
+
+Ensure that your browser supports Wasm. Two options:
+
+- Run this [StackOverflow code snippet](https://stackoverflow.com/a/47880734)
+
+- Search for your browser version's Wasm support on [caniuse.com](https://caniuse.com/#search=wasm)
+
+Open the HTML file with your browser, you should see:
+
+![Wasm Hello World Screenshot](./images/wasm_hello_world_screenshot.png)
