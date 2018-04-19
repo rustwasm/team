@@ -2,8 +2,9 @@
 
 ## Rust
 
-If you haven't already you'll need to install Rust! See [the setup section](../setup.html) for more
-details. Once you've done that you'll need to install `wasm-pack`.
+If you haven't already you'll need to install Rust! See
+[the setup section](https://rust-lang-nursery.github.io/rust-wasm/setup.html)
+for more details. Once you've done that you'll need to install `wasm-pack`.
 
 Just run the following:
 
