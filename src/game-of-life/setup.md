@@ -26,6 +26,23 @@ rustup install nightly
 rustup target add wasm32-unknown-unknown --toolchain nightly
 ```
 
+You may want to set your default tool chain to nightly:
+
+```
+rustup default nightly
+```
+
+This is convenient if you want to run tests, or have an editor that integrates with cargo. If you run `cargo build` on `stable` you will get this error:
+
+```
+error[E0554]: #![feature] may not be used on the stable release channel
+ --> ~/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-macro-0.2.10/src/lib.rs:1:1
+  |
+1 | #![feature(proc_macro)]
+  | ^^^^^^^^^^^^^^^^^^^^^^^
+```
+ 
+
 ### `npm`
 
 `npm` is a package manager for JavaScript. We will use it to install and run a
