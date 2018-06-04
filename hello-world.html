@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello World - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./background-and-concepts.html"><strong>2.</strong> Background And Concepts</a></li><li><a href="./setup.html"><strong>3.</strong> Setup</a></li><li><a href="./hello-world.html" class="active"><strong>4.</strong> Hello World</a></li><li><a href="./tools.html"><strong>5.</strong> Tools</a></li><li><a href="./workflows.html"><strong>6.</strong> Workflows</a></li><li><a href="./js-ffi.html"><strong>7.</strong> JavaScript Interoperation</a></li><li><a href="./tutorials.html"><strong>8.</strong> Tutorials</a></li><li><ul class="section"><li><a href="./game-of-life/introduction.html"><strong>8.1.</strong> Conway's Game of Life</a></li><li><ul class="section"><li><a href="./game-of-life/setup.html"><strong>8.1.1.</strong> Setup</a></li><li><a href="./game-of-life/rules.html"><strong>8.1.2.</strong> Rules</a></li><li><a href="./game-of-life/implementing.html"><strong>8.1.3.</strong> Implementing Life</a></li><li><a href="./game-of-life/debugging.html"><strong>8.1.4.</strong> Debugging</a></li><li><a href="./game-of-life/interactivity.html"><strong>8.1.5.</strong> Adding Interactivity</a></li><li><a href="./game-of-life/time-profiling.html"><strong>8.1.6.</strong> Time Profiling</a></li><li><a href="./game-of-life/code-size.html"><strong>8.1.7.</strong> Shrinking <code>.wasm</code> Size</a></li><li><a href="./game-of-life/publishing.html"><strong>8.1.8.</strong> Publishing</a></li></ul></li><li><a href="./wasm-pack/introduction.html"><strong>8.2.</strong> wasm-pack</a></li><li><ul class="section"><li><a href="./wasm-pack/setup.html"><strong>8.2.1.</strong> Setup</a></li><li><a href="./wasm-pack/initialize.html"><strong>8.2.2.</strong> Project Initialization</a></li><li><a href="./wasm-pack/rust-code.html"><strong>8.2.3.</strong> Rust Code</a></li><li><a href="./wasm-pack/package-code.html"><strong>8.2.4.</strong> Package Code For npm</a></li><li><a href="./wasm-pack/run-the-code.html"><strong>8.2.5.</strong> Run The Code From npm</a></li><li><a href="./wasm-pack/next-steps.html"><strong>8.2.6.</strong> Next Steps</a></li></ul></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./hello-world.html#hello-world-for-wasm32-unknown-unknown" id="hello-world-for-wasm32-unknown-unknown"><h1>&quot;Hello World&quot; for <code>wasm32-unknown-unknown</code></h1></a>
+<p>A basic &quot;hello world&quot; can be generated with:</p>
+<pre><code>$ cargo +nightly new --lib hello-world
+</code></pre>
+<p>Next up change <code>Cargo.toml</code> to have:</p>
+<pre><code class="language-toml">[lib]
+crate-type = [&quot;cdylib&quot;]
+</code></pre>
+<p>and edit <code>src/lib.rs</code> to contain:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[no_mangle]
+pub extern fn add_one(a: u32) -&gt; u32 {
+    a + 1
+}
+#}</code></pre></pre>
+<p>Now prepare the wasm binary with:</p>
+<pre><code>$ cargo +nightly build --target wasm32-unknown-unknown --release
+
+# make the binary smaller by removing all unneeded exports, imports, and functions 
+# (working around bugs in rustc toolchain)
+$ wasm-gc target/wasm32-unknown-unknown/release/hello_world.wasm -o hello_world.gc.wasm
+</code></pre>
+<p>And we can test it out with:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      WebAssembly.instantiateStreaming(fetch('hello_world.gc.wasm'))
+        .then(wasm_module =&gt; {
+            alert(`2 + 1 = ${wasm_module.instance.exports.add_one(2)}`);
+        });
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Note: To run with <code>instantiateStreaming</code> and <code>compileStreaming</code>, you need your webserver to serve <code>.wasm</code> file with <code>application/wasm</code> MIME type. The <a href="https://github.com/thecoshman/http">https</a> crate can be used to serve files from <code>localhost</code>, and includes the <code>application/wasm</code> MIME type out of the box.</p>
+<p>Alternatively, if you are running locally without any webserver.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      fetch('hello_world.gc.wasm')
+        .then(r =&gt; r.arrayBuffer())
+        .then(r =&gt; WebAssembly.instantiate(r))
+        .then(wasm_module =&gt; {
+            alert(`2 + 1 = ${wasm_module.instance.exports.add_one(2)}`);
+        });
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>If you have Python 3 installed, you can alternatively serve this file with Python's built
+in web server from <code>localhost</code>. Python's web server cannot serve <code>instantiateStreaming</code> or
+<code>compileStreaming</code> due to its lack of support for the <code>application/wasm</code> MIME type.</p>
+<pre><code>$ python3 -m http.server
+</code></pre>
+<p>Ensure that your browser supports Wasm. Two options:</p>
+<ul>
+<li>
+<p>Run this <a href="https://stackoverflow.com/a/47880734">StackOverflow code snippet</a></p>
+</li>
+<li>
+<p>Search for your browser version's Wasm support on <a href="https://caniuse.com/#search=wasm">caniuse.com</a></p>
+</li>
+</ul>
+<p>Open the HTML file with your browser, you should see:</p>
+<p><img src="./images/wasm_hello_world_screenshot.png" alt="Wasm Hello World Screenshot" /></p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./setup.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./tools.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./setup.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./tools.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

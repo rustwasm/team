@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rules - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./background-and-concepts.html"><strong>2.</strong> Background And Concepts</a></li><li><a href="./setup.html"><strong>3.</strong> Setup</a></li><li><a href="./hello-world.html"><strong>4.</strong> Hello World</a></li><li><a href="./tools.html"><strong>5.</strong> Tools</a></li><li><a href="./workflows.html"><strong>6.</strong> Workflows</a></li><li><a href="./js-ffi.html"><strong>7.</strong> JavaScript Interoperation</a></li><li><a href="./tutorials.html"><strong>8.</strong> Tutorials</a></li><li><ul class="section"><li><a href="./game-of-life/introduction.html"><strong>8.1.</strong> Conway's Game of Life</a></li><li><ul class="section"><li><a href="./game-of-life/setup.html"><strong>8.1.1.</strong> Setup</a></li><li><a href="./game-of-life/rules.html" class="active"><strong>8.1.2.</strong> Rules</a></li><li><a href="./game-of-life/implementing.html"><strong>8.1.3.</strong> Implementing Life</a></li><li><a href="./game-of-life/debugging.html"><strong>8.1.4.</strong> Debugging</a></li><li><a href="./game-of-life/interactivity.html"><strong>8.1.5.</strong> Adding Interactivity</a></li><li><a href="./game-of-life/time-profiling.html"><strong>8.1.6.</strong> Time Profiling</a></li><li><a href="./game-of-life/code-size.html"><strong>8.1.7.</strong> Shrinking <code>.wasm</code> Size</a></li><li><a href="./game-of-life/publishing.html"><strong>8.1.8.</strong> Publishing</a></li></ul></li><li><a href="./wasm-pack/introduction.html"><strong>8.2.</strong> wasm-pack</a></li><li><ul class="section"><li><a href="./wasm-pack/setup.html"><strong>8.2.1.</strong> Setup</a></li><li><a href="./wasm-pack/initialize.html"><strong>8.2.2.</strong> Project Initialization</a></li><li><a href="./wasm-pack/rust-code.html"><strong>8.2.3.</strong> Rust Code</a></li><li><a href="./wasm-pack/package-code.html"><strong>8.2.4.</strong> Package Code For npm</a></li><li><a href="./wasm-pack/run-the-code.html"><strong>8.2.5.</strong> Run The Code From npm</a></li><li><a href="./wasm-pack/next-steps.html"><strong>8.2.6.</strong> Next Steps</a></li></ul></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./game-of-life/rules.html#rules-of-conways-game-of-life" id="rules-of-conways-game-of-life"><h1>Rules of Conway's Game of Life</h1></a>
+<p><em>Note: If you are already familiar with Conway's Game of Life and its rules,
+feel free to skip to the next section!</em></p>
+<p><a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia gives a great description of the rules of Conway's Game of
+Life:</a></p>
+<blockquote>
+<p>The universe of the Game of Life is an infinite two-dimensional orthogonal
+grid of square cells, each of which is in one of two possible states, alive or
+dead, or &quot;populated&quot; or &quot;unpopulated&quot;. Every cell interacts with its eight
+neighbours, which are the cells that are horizontally, vertically, or
+diagonally adjacent. At each step in time, the following transitions occur:</p>
+<ol>
+<li>
+<p>Any live cell with fewer than two live neighbours dies, as if caused by
+underpopulation.</p>
+</li>
+<li>
+<p>Any live cell with two or three live neighbours lives on to the next
+generation.</p>
+</li>
+<li>
+<p>Any live cell with more than three live neighbours dies, as if by
+overpopulation.</p>
+</li>
+<li>
+<p>Any dead cell with exactly three live neighbours becomes a live cell, as if
+by reproduction.</p>
+</li>
+</ol>
+<p>The initial pattern constitutes the seed of the system. The first generation
+is created by applying the above rules simultaneously to every cell in the
+seed—births and deaths occur simultaneously, and the discrete moment at which
+this happens is sometimes called a tick (in other words, each generation is a
+pure function of the preceding one). The rules continue to be applied
+repeatedly to create further generations.</p>
+</blockquote>
+<p>Consider the following initial universe:</p>
+<p><img src='./images/game-of-life/initial-universe.png' alt='Initial Universe' width=80 /></p>
+<p>We can calculate the next generation by considering each cell. The top left cell
+is dead. Rule (4) is the only transition rule that applies to dead
+cells. However, because the top left cell does not have exactly three live
+neighbors, the transition rule does not apply, and it remains dead in the next
+generation. The same goes for every other cell in the first row as well.</p>
+<p>Things get interesting when we consider the top live cell, in the second row,
+third column. For live cells, any of the first three rules potentially
+applies. In this cell's case, it has only one live neighbor, and therefore rule
+(1) applies: this cell will die in the next generation. The same fate awaits the
+bottom live cell.</p>
+<p>The middle live cell has two live neighbors: the top and bottom live cells. This
+means that rule (2) applies, and it remains live in the next generation.</p>
+<p>The final interesting cases are the dead cells just to the left and right of the
+middle live cell. The three live cells are all neighbors both of these cells,
+which means that rule (4) applies, and these cells will become alive in the next
+generation.</p>
+<p>Put it all together, and we get this universe after the next tick:</p>
+<p><img src='./images/game-of-life/next-universe.png' alt='Next Universe' width=80 /></p>
+<p>From these simple, deterministic rules, strange and exciting behavior emerges:</p>
+<table><thead><tr><th> Gosper's glider gun </th><th> Pulsar </th><th> Space ship </th></tr></thead><tbody>
+<tr><td> <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Gospers_glider_gun.gif" alt="Gosper's glider gun" /> </td><td> <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Game_of_life_pulsar.gif" alt="Pulsar" /> </td><td> <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Game_of_life_animated_LWSS.gif" alt="Lighweight space ship" /> </td></tr>
+</tbody></table>
+<p><center></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C2vgICfQawE?rel=0&amp;start=65" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</center>
+<a class="header" href="./game-of-life/rules.html#exercises" id="exercises"><h2>Exercises</h2></a>
+<ul>
+<li>
+<p>Compute by hand the next tick of our example universe. Notice anything
+familiar?</p>
+</li>
+<li>
+<p>Can you find an initial universe that is stable? That is, a universe in which
+every generation is always the same.</p>
+</li>
+</ul>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./game-of-life/setup.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./game-of-life/implementing.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./game-of-life/setup.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./game-of-life/implementing.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

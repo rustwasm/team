@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Debugging - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./background-and-concepts.html"><strong>2.</strong> Background And Concepts</a></li><li><a href="./setup.html"><strong>3.</strong> Setup</a></li><li><a href="./hello-world.html"><strong>4.</strong> Hello World</a></li><li><a href="./tools.html"><strong>5.</strong> Tools</a></li><li><a href="./workflows.html"><strong>6.</strong> Workflows</a></li><li><a href="./js-ffi.html"><strong>7.</strong> JavaScript Interoperation</a></li><li><a href="./tutorials.html"><strong>8.</strong> Tutorials</a></li><li><ul class="section"><li><a href="./game-of-life/introduction.html"><strong>8.1.</strong> Conway's Game of Life</a></li><li><ul class="section"><li><a href="./game-of-life/setup.html"><strong>8.1.1.</strong> Setup</a></li><li><a href="./game-of-life/rules.html"><strong>8.1.2.</strong> Rules</a></li><li><a href="./game-of-life/implementing.html"><strong>8.1.3.</strong> Implementing Life</a></li><li><a href="./game-of-life/debugging.html" class="active"><strong>8.1.4.</strong> Debugging</a></li><li><a href="./game-of-life/interactivity.html"><strong>8.1.5.</strong> Adding Interactivity</a></li><li><a href="./game-of-life/time-profiling.html"><strong>8.1.6.</strong> Time Profiling</a></li><li><a href="./game-of-life/code-size.html"><strong>8.1.7.</strong> Shrinking <code>.wasm</code> Size</a></li><li><a href="./game-of-life/publishing.html"><strong>8.1.8.</strong> Publishing</a></li></ul></li><li><a href="./wasm-pack/introduction.html"><strong>8.2.</strong> wasm-pack</a></li><li><ul class="section"><li><a href="./wasm-pack/setup.html"><strong>8.2.1.</strong> Setup</a></li><li><a href="./wasm-pack/initialize.html"><strong>8.2.2.</strong> Project Initialization</a></li><li><a href="./wasm-pack/rust-code.html"><strong>8.2.3.</strong> Rust Code</a></li><li><a href="./wasm-pack/package-code.html"><strong>8.2.4.</strong> Package Code For npm</a></li><li><a href="./wasm-pack/run-the-code.html"><strong>8.2.5.</strong> Run The Code From npm</a></li><li><a href="./wasm-pack/next-steps.html"><strong>8.2.6.</strong> Next Steps</a></li></ul></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./game-of-life/debugging.html#debugging" id="debugging"><h1>Debugging</h1></a>
+<p>Before we write much more code, we will want to have some debugging tools in our
+belt for when things go wrong.</p>
+<a class="header" href="./game-of-life/debugging.html#building-with-debug-symbols" id="building-with-debug-symbols"><h2>Building with Debug Symbols</h2></a>
+<blockquote>
+<p>⚡ When debugging, always make sure you are building with debug symbols!</p>
+</blockquote>
+<p>If you don't have debug symbols enabled, then the <code>&quot;name&quot;</code> section won't be
+present in the compiled <code>.wasm</code> binary, and stack traces will have function
+names like <code>wasm[42]</code> rather than
+<code>wasm_game_of_life::Universe::live_neighbor_count</code>.</p>
+<p>When using a &quot;debug&quot; build (aka <code>npm run build-debug</code>) debug symbols are enabled
+by default.</p>
+<p>With a &quot;release&quot; build, debug symbols are not enabled by default. To enable
+debug symbols, ensure that you <code>debug = true</code> in the <code>[profile.release]</code> section
+of your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[profile.release]
+debug = true
+</code></pre>
+<p>The project template we've been working with adds this to <code>Cargo.toml</code> by
+default, for convenience.</p>
+<a class="header" href="./game-of-life/debugging.html#logging" id="logging"><h2>Logging</h2></a>
+<p>Logging is one of the most effective tools we have for proving and disproving
+hypotheses about why our programs are buggy. On the Web, the <code>console.log</code>
+function is the way to log messages to the browser's developer tools console. We
+can use <code>wasm_bindgen</code> to import a reference to it, like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[wasm_bindgen]
+extern {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(msg: &amp;str);
+}
+
+// A macro to provide `println!(..)`-style syntax for `console.log` logging.
+macro_rules! log {
+    ($($t:tt)*) =&gt; (log(&amp;format!($($t)*)))
+}
+#}</code></pre></pre>
+<p>Then, we can start logging messages to the console by inserting calls to <code>log</code>
+in Rust code. For example, to log each cell's state, live neighbors count, and
+next state, we could modify our code like this:</p>
+<pre><code class="language-diff">diff --git a/src/lib.rs b/src/lib.rs
+index f757641..a30e107 100755
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -63,6 +63,11 @@ impl Universe {
+                 let cell = self.cells[idx];
+                 let live_neighbors = self.live_neighbor_count(row, col);
+
++                log!(
++                    &quot;cell[{}, {}] is initially {:?} and has {} live neighbors&quot;,
++                    row, col, cell, live_neighbors
++                );
++
+                 let next_cell = match (cell, live_neighbors) {
+                     // Rule 1: Any live cell with fewer than two live neighbours
+                     // dies, as if caused by underpopulation.
+@@ -80,6 +85,8 @@ impl Universe {
+                     (otherwise, _) =&gt; otherwise,
+                 };
+
++                log!(&quot;    it becomes {:?}&quot;, next_cell);
++
+                 next[idx] = next_cell;
+             }
+         }
+</code></pre>
+<p>Alternatively, the <code>console.error</code> function has the same interface as
+<code>console.log</code>, but developer tools tend to also capture and display a stack
+trace alongside the logged message when <code>console.error</code> is used.</p>
+<a class="header" href="./game-of-life/debugging.html#references" id="references"><h3>References</h3></a>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">The <code>console</code> object</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console">Firefox Developer Tools — Web Console</a></li>
+<li><a href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide/console">Microsoft Edge Developer Tools — Console</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/console/get-started">Get Started with the Chrome DevTools Console</a></li>
+</ul>
+<a class="header" href="./game-of-life/debugging.html#using-a-debugger" id="using-a-debugger"><h2>Using a Debugger</h2></a>
+<p>Unfortunately, the debugging story for WebAssembly is still immature. On most
+Unix systems, <a href="http://dwarfstd.org/">DWARF</a> is used to encode the information that a debugger
+needs to provide source-level inspection of a running program. There is an
+alternative format that encodes similar information on Windows. Currently, there
+is no equivalent for WebAssembly. Therefore, debuggers currently provide limited
+utility, and we end up stepping through raw WebAssembly instructions emitted by
+the compiler, rather than the Rust source text we authored.</p>
+<p>Nonetheless, debuggers are still useful for inspecting the JavaScript that
+interacts with our WebAssembly. For example, we can use the debugger to pause on
+each iteration of our <code>renderLoop</code> function. This provides us with a convenient
+checkpoint for inspecting logged messages, and comparing the currently rendered
+frame to the previous one.</p>
+<p><a href="./images/game-of-life/debugging.png"><img src="./images/game-of-life/debugging.png" alt="Screenshot of debugging the Game of Life" /></a></p>
+<a class="header" href="./game-of-life/debugging.html#references-1" id="references-1"><h3>References</h3></a>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger">Firefox Developer Tools — Debugger</a></li>
+<li><a href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide/debugger">Microsoft Edge Developer Tools — Debugger</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/javascript/">Get Started with Debugging JavaScript in Chrome DevTools</a></li>
+</ul>
+<a class="header" href="./game-of-life/debugging.html#avoid-the-need-to-debug-webassembly-in-the-first-place" id="avoid-the-need-to-debug-webassembly-in-the-first-place"><h2>Avoid the Need to Debug WebAssembly in the First Place</h2></a>
+<p>While some bugs are specific to interfaceing JavaScript and WebAssembly,
+experience says that most are not. Try to reproduce bugs as normal Rust
+<code>#[test]</code> functions, where you can leverage your OS's mature native tooling when
+debugging. Use testing crates like <a href="https://crates.io/crates/quickcheck"><code>quickcheck</code></a> to exercise the
+interface you expose to JavaScript. Ultimately, you will have an easier time
+finding and fixing bugs if you can isolate them in a smaller test cases that
+don't require interacting with JavaScript.</p>
+<p>Note that in order to run the <code>#[test]</code>s without compiler and linker errors, you
+will need to comment out the <code>#![wasm_bindgen]</code> annotations and <code>crate-type = &quot;cdylib&quot;</code> bits.</p>
+<a class="header" href="./game-of-life/debugging.html#exercises" id="exercises"><h2>Exercises</h2></a>
+<ul>
+<li>
+<p>Add logging to the <code>tick</code> function that records the row and column of each
+cell that transitioned states from live to dead or vice versa.</p>
+</li>
+<li>
+<p>Introduce a <code>panic!()</code> in the <code>Universe::new</code> method. Inspect the panic's
+backtrace in your Web browser's JavaScript debugger. Disable debug symbols,
+rebuild, and inspect the stack trace again. Not as useful, is it?</p>
+</li>
+<li>
+<p>Checkout the <code>chapter-one-with-bug</code> branch. Rebuild and reload the Web
+page. It should now be obvious that this branch's implementation contains a
+bug, and every cell is apparently alive. This is a Real World(tm) bug that
+your author made when initially creating the example code. Find the bug and
+fix it. <em>Don't look at the commit history! That's cheating ;-)</em></p>
+</li>
+</ul>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./game-of-life/implementing.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./game-of-life/interactivity.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./game-of-life/implementing.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./game-of-life/interactivity.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

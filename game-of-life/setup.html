@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Setup - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./background-and-concepts.html"><strong>2.</strong> Background And Concepts</a></li><li><a href="./setup.html"><strong>3.</strong> Setup</a></li><li><a href="./hello-world.html"><strong>4.</strong> Hello World</a></li><li><a href="./tools.html"><strong>5.</strong> Tools</a></li><li><a href="./workflows.html"><strong>6.</strong> Workflows</a></li><li><a href="./js-ffi.html"><strong>7.</strong> JavaScript Interoperation</a></li><li><a href="./tutorials.html"><strong>8.</strong> Tutorials</a></li><li><ul class="section"><li><a href="./game-of-life/introduction.html"><strong>8.1.</strong> Conway's Game of Life</a></li><li><ul class="section"><li><a href="./game-of-life/setup.html" class="active"><strong>8.1.1.</strong> Setup</a></li><li><a href="./game-of-life/rules.html"><strong>8.1.2.</strong> Rules</a></li><li><a href="./game-of-life/implementing.html"><strong>8.1.3.</strong> Implementing Life</a></li><li><a href="./game-of-life/debugging.html"><strong>8.1.4.</strong> Debugging</a></li><li><a href="./game-of-life/interactivity.html"><strong>8.1.5.</strong> Adding Interactivity</a></li><li><a href="./game-of-life/time-profiling.html"><strong>8.1.6.</strong> Time Profiling</a></li><li><a href="./game-of-life/code-size.html"><strong>8.1.7.</strong> Shrinking <code>.wasm</code> Size</a></li><li><a href="./game-of-life/publishing.html"><strong>8.1.8.</strong> Publishing</a></li></ul></li><li><a href="./wasm-pack/introduction.html"><strong>8.2.</strong> wasm-pack</a></li><li><ul class="section"><li><a href="./wasm-pack/setup.html"><strong>8.2.1.</strong> Setup</a></li><li><a href="./wasm-pack/initialize.html"><strong>8.2.2.</strong> Project Initialization</a></li><li><a href="./wasm-pack/rust-code.html"><strong>8.2.3.</strong> Rust Code</a></li><li><a href="./wasm-pack/package-code.html"><strong>8.2.4.</strong> Package Code For npm</a></li><li><a href="./wasm-pack/run-the-code.html"><strong>8.2.5.</strong> Run The Code From npm</a></li><li><a href="./wasm-pack/next-steps.html"><strong>8.2.6.</strong> Next Steps</a></li></ul></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./game-of-life/setup.html#setup" id="setup"><h1>Setup</h1></a>
+<a class="header" href="./game-of-life/setup.html#required-tools" id="required-tools"><h2>Required Tools</h2></a>
+<p>You will need the following tools installed to follow along with this tutorial.</p>
+<a class="header" href="./game-of-life/setup.html#the-rust-toolchain" id="the-rust-toolchain"><h3>The Rust Toolchain</h3></a>
+<p>You will need the standard Rust toolchain, including <code>rustup</code>, <code>rustc</code>, and
+<code>cargo</code> for this tutorial.</p>
+<p><a href="https://www.rust-lang.org/en-US/install.html">Follow these instructions to install the Rust toolchain.</a></p>
+<a class="header" href="./game-of-life/setup.html#the-wasm32-unknown-unknown-target" id="the-wasm32-unknown-unknown-target"><h3>The <code>wasm32-unknown-unknown</code> Target</h3></a>
+<p>Once you have the Rust toolchain installed, you'll want to be able to compile
+Rust programs to WebAssembly, rather than your machine's native code. You can
+enable this by adding the <code>wasm32-unknown-unknown</code> target with the following
+command:</p>
+<pre><code>rustup update
+rustup install nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
+</code></pre>
+<a class="header" href="./game-of-life/setup.html#npm" id="npm"><h3><code>npm</code></h3></a>
+<p><code>npm</code> is a package manager for JavaScript. We will use it to install and run a
+JavaScript bundler and development server. At the end of the tutorial, we will
+publish our compiled <code>.wasm</code> to the <code>npm</code> registry.</p>
+<p><a href="https://www.npmjs.com/get-npm">Follow these instructions to install <code>npm</code>.</a></p>
+<a class="header" href="./game-of-life/setup.html#wasm-bindgen" id="wasm-bindgen"><h3><code>wasm-bindgen</code></h3></a>
+<p><a href="https://github.com/rustwasm/wasm-bindgen"><code>wasm-bindgen</code></a> generates bidirectional bindings to and from JavaScript for
+Rust and WebAssembly.</p>
+<p>Install <code>wasm-bindgen</code> with this command:</p>
+<pre><code>cargo +nightly install wasm-bindgen-cli
+</code></pre>
+<a class="header" href="./game-of-life/setup.html#clone-the-project-template" id="clone-the-project-template"><h2>Clone the Project Template</h2></a>
+<p>The project template contains a &quot;hello world&quot; program. It comes pre-configured
+with sane defaults, so you can quickly build, integrate, and package your code
+for the Web.</p>
+<p>Clone this tutorials code repository, enter its directory, and checkout the
+<code>chapter-zero</code> branch:</p>
+<pre><code class="language-text">git clone https://github.com/rustwasm/wasm_game_of_life.git
+cd ./wasm_game_of_life
+git checkout -b chapter-zero origin/chapter-zero
+</code></pre>
+<a class="header" href="./game-of-life/setup.html#whats-inside" id="whats-inside"><h2>What's Inside</h2></a>
+<p>Let's take a look at the contents of our project:</p>
+<pre><code class="language-text">.
+├── bootstrap.js
+├── Cargo.lock
+├── Cargo.toml
+├── index.html
+├── index.js
+├── package.json
+├── package-lock.json
+├── src
+│   └── lib.rs
+├── wasm_game_of_life_bg.wasm
+├── wasm_game_of_life.js
+└── webpack.config.js
+</code></pre>
+<p>Most of these are configuration files, but there are a few files we should
+highlight.</p>
+<a class="header" href="./game-of-life/setup.html#indexhtml" id="indexhtml"><h3><code>index.html</code></h3></a>
+<p>This is the root HTML file for the the Web page. It doesn't do much other than
+load <code>bootstrap.js</code>, which is a very thin wrapper around <code>index.js</code>.</p>
+<pre><code class="language-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta content=&quot;text/html;charset=utf-8&quot; http-equiv=&quot;Content-Type&quot;/&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script src='./bootstrap.js'&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<a class="header" href="./game-of-life/setup.html#indexjs" id="indexjs"><h3><code>index.js</code></h3></a>
+<p>The <code>index.js</code> is the main entry point for our Web page's JavaScript. It imports
+the project's WebAssembly module, and calls the module's <code>greet</code> function.</p>
+<pre><code class="language-js">import { greet } from &quot;./wasm_game_of_life&quot;;
+
+greet(&quot;Rust and WebAssembly&quot;);
+</code></pre>
+<a class="header" href="./game-of-life/setup.html#srclibrs" id="srclibrs"><h3><code>src/lib.rs</code></h3></a>
+<p>The <code>src/lib.rs</code> file is the root of the Rust crate that we are compiling to
+WebAssembly. It uses <code>wasm_bindgen</code> to interface with JavaScript. It imports the
+<code>window.alert</code> JavaScript function, and exports the <code>greet</code> Rust function, which
+takes a <code>name</code> parameter and alerts a greeting message.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(proc_macro, wasm_custom_section, wasm_import_module)]
+
+#fn main() {
+extern crate wasm_bindgen;
+
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern {
+    fn alert(s: &amp;str);
+}
+
+#[wasm_bindgen]
+pub fn greet(name: &amp;str) {
+    alert(&amp;format!(&quot;Hello, {}!&quot;, name));
+}
+#}</code></pre></pre>
+<a class="header" href="./game-of-life/setup.html#building-and-serving" id="building-and-serving"><h2>Building and Serving</h2></a>
+<p>First, ensure that the JavaScript build dependencies are installed for this
+project:</p>
+<pre><code class="language-text">npm install
+</code></pre>
+<p>This command only needs to be run once, and will install the <code>webpack</code>
+JavaScript bundler and its development server. Note that <code>webpack</code> is not
+required for working with Rust and WebAssembly, it is just the bundler and
+development server we've chosen for convenience here.</p>
+<p>To build the Rust crate as WebAssembly and generate the <code>wasm_bindgen</code> glue, run
+this command:</p>
+<pre><code class="language-text">npm run build-debug
+</code></pre>
+<p>The first build may take a little while, since dependencies need to be compiled.
+But don't worry: subsequent builds, when dependencies don't need to be
+recompiled, will be much faster.</p>
+<p>This creates a &quot;debug&quot; build of the Rust crates: a build that does not have
+optimizations applied, and has symbols included for better debugging in your
+browser's developer tools. You can also create a &quot;release&quot; build that has
+optimization passes applied with this command:</p>
+<pre><code>npm run build-release
+</code></pre>
+<p>This is the command we want to use to create <code>.wasm</code> binaries for profiling and
+deploying to production.</p>
+<p>Next, open a new terminal for the development server. Running the server in a
+new terminal lets us leave it running in the background, and doesn't block us
+from running other commands in the meantime. In the new terminal, run this
+command:</p>
+<pre><code>npm run serve
+</code></pre>
+<p>Navigate your Web browser to <a href="http://localhost:8080/">http://localhost:8080/</a>
+and you should be greeted with an alert message:</p>
+<p><a href="./images/game-of-life/setup.png"><img src="./images/game-of-life/setup.png" alt="Screenshot of the &quot;Hello, Rust and WebAssembly!&quot; Web page alert" /></a></p>
+<p>Anytime you make changes and want them reflected on
+<a href="http://localhost:8080/">http://localhost:8080/</a>, just re-run the <code>npm run build-debug</code>
+command.</p>
+<a class="header" href="./game-of-life/setup.html#exercises" id="exercises"><h2>Exercises</h2></a>
+<ul>
+<li>
+<p>Modify <code>index.js</code> to greet you by your name instead of by &quot;Rust and WebAssembly&quot;.</p>
+</li>
+<li>
+<p>Modify the <code>greet</code> function to take two <code>&amp;str</code> parameters. What happens if you
+don't pass a second argument from <code>index.js</code>? <em>Hint: open your Web browser's
+developer tools.</em></p>
+</li>
+</ul>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./game-of-life/introduction.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./game-of-life/rules.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./game-of-life/introduction.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./game-of-life/rules.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

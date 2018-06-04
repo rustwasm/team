@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rust Code - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./background-and-concepts.html"><strong>2.</strong> Background And Concepts</a></li><li><a href="./setup.html"><strong>3.</strong> Setup</a></li><li><a href="./hello-world.html"><strong>4.</strong> Hello World</a></li><li><a href="./tools.html"><strong>5.</strong> Tools</a></li><li><a href="./workflows.html"><strong>6.</strong> Workflows</a></li><li><a href="./js-ffi.html"><strong>7.</strong> JavaScript Interoperation</a></li><li><a href="./tutorials.html"><strong>8.</strong> Tutorials</a></li><li><ul class="section"><li><a href="./game-of-life/introduction.html"><strong>8.1.</strong> Conway's Game of Life</a></li><li><ul class="section"><li><a href="./game-of-life/setup.html"><strong>8.1.1.</strong> Setup</a></li><li><a href="./game-of-life/rules.html"><strong>8.1.2.</strong> Rules</a></li><li><a href="./game-of-life/implementing.html"><strong>8.1.3.</strong> Implementing Life</a></li><li><a href="./game-of-life/debugging.html"><strong>8.1.4.</strong> Debugging</a></li><li><a href="./game-of-life/interactivity.html"><strong>8.1.5.</strong> Adding Interactivity</a></li><li><a href="./game-of-life/time-profiling.html"><strong>8.1.6.</strong> Time Profiling</a></li><li><a href="./game-of-life/code-size.html"><strong>8.1.7.</strong> Shrinking <code>.wasm</code> Size</a></li><li><a href="./game-of-life/publishing.html"><strong>8.1.8.</strong> Publishing</a></li></ul></li><li><a href="./wasm-pack/introduction.html"><strong>8.2.</strong> wasm-pack</a></li><li><ul class="section"><li><a href="./wasm-pack/setup.html"><strong>8.2.1.</strong> Setup</a></li><li><a href="./wasm-pack/initialize.html"><strong>8.2.2.</strong> Project Initialization</a></li><li><a href="./wasm-pack/rust-code.html" class="active"><strong>8.2.3.</strong> Rust Code</a></li><li><a href="./wasm-pack/package-code.html"><strong>8.2.4.</strong> Package Code For npm</a></li><li><a href="./wasm-pack/run-the-code.html"><strong>8.2.5.</strong> Run The Code From npm</a></li><li><a href="./wasm-pack/next-steps.html"><strong>8.2.6.</strong> Next Steps</a></li></ul></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./wasm-pack/rust-code.html#rust-code" id="rust-code"><h1>Rust Code</h1></a>
+<p>If you open up <code>src/lib.rs</code> you should see a file that looks like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+#}</code></pre></pre>
+<p>Let's quickly modify the test suite to work for what we'll be doing. It should look like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[test]
+fn it_works() {
+    assert_eq!(add(2, 2), 4);
+}
+#}</code></pre></pre>
+<p>We'll use this later to make sure our <code>add</code> function works!</p>
+<p>Now we need to add this to the top of the file:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(proc_macro, wasm_import_module, wasm_custom_section)]
+#fn main() {
+extern crate wasm_bindgen;
+use wasm_bindgen::prelude::*;
+#}</code></pre></pre>
+<p>Let's step through this line by line. First up is the list of nightly features. We're enabling this for
+the whole crate. What this means is that we will later tag code with an attribute and this will
+allow Rust to generate code that we don't have to write by hand. In our case it'll use
+<code>wasm-bindgen.</code> It should be noted that <code>#![feature(...)]</code> implies using the nightly
+compiler. This gated feature will hopefully be stabilized and landed soon so that you won't need it!</p>
+<p><code>wasm-bindgen</code> knows how to make code that works well with wasm so we don't have to
+worry about it too much and just write Rust code for the most part. If you want to know the full
+extent of its capabilities check out the README on its repo which can be found
+<a href="https://github.com/alexcrichton/wasm-bindgen">here</a>. For our purposes we need to know that if we
+want functions to work with wasm easily we'll need it.</p>
+<p>The next line says we're importing the <code>wasm-bindgen</code> crate and the line after that imports the
+prelude from <code>wasm-bindgen</code>. The <code>extern crate</code> call lets the compiler know what crates to link in
+and the <code>prelude</code> contains all the types and functions that <code>wasm-bindgen</code> needs to work properly!</p>
+<p>Cool let's import the <code>alert</code> function from JS so that we can call it in our Rust code!</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[wasm_bindgen]
+extern {
+    fn alert(s: &amp;str);
+}
+#}</code></pre></pre>
+<p>First off we use the <code>#[wasm_bindgen]</code> attribute. This attribute will handle all the code with
+importing the functions we declare below it. The next is an extern block. This lets us declare
+what JS functions we want to import. We just need to declare the function signature for it. In this
+case we're importing the function <code>alert</code> which takes an <code>&amp;str</code> as input!</p>
+<p>Alright so we have our external bit of code and we have everything imported so let's write the
+actual <code>add</code> function, as well as an <code>add_alert</code> function that will use <code>add</code> in itself but also
+call <code>alert</code> to print out the results before returning the value.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[wasm_bindgen]
+pub fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+
+#[wasm_bindgen]
+pub fn alert_add(a: i32, b: i32) -&gt; i32 {
+    let c = add(a, b);
+    alert(&amp;format!(&quot;Hello from Rust! {} + {} = {}&quot;, a, b, c));
+    c
+}
+#}</code></pre></pre>
+<p>These functions are fairly straightforward if you're familiar with Rust, but if you're not we'll walk
+through it. Both functions take a value <code>a</code> and a value <code>b</code>. We have said that both are 32 bit
+integers (<code>i32</code>). We then say both will return an <code>i32</code>. The last line in a function returns the value
+if there is no semicolon. So in the <code>add</code> function the value of <code>a + b</code> gets calculated and it's
+value is returned! In the case of <code>alert_add</code> we store the value of the <code>add</code> function we just made
+into the variable <code>c</code>. We then call <code>alert</code> saying what the add operation looked like and what the
+value was! We then return what was inside <code>c</code>. Neat!</p>
+<p>This is all the Rust code we need to write. Your <code>lib.rs</code> file should look like this by now:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(proc_macro, wasm_import_module, wasm_custom_section)]
+#fn main() {
+extern crate wasm_bindgen;
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern {
+    fn alert(s: &amp;str);
+}
+
+#[wasm_bindgen]
+pub fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+
+#[wasm_bindgen]
+pub fn alert_add(a: i32, b: i32) -&gt; i32 {
+    let c = add(a, b);
+    alert(&amp;format!(&quot;Hello from Rust! {} + {} = {}&quot;, a, b, c));
+    c
+}
+
+#[test]
+fn it_works() {
+    assert_eq!(add(2, 2), 4);
+}
+#}</code></pre></pre>
+<p>Just to make sure that <code>add</code> works we'll run the test we wrote earlier:</p>
+<pre><code class="language-bash">$ cargo test
+</code></pre>
+<p>You should get output that looks sort of like this:</p>
+<pre><code class="language-bash">   Compiling wasm-add v0.1.1 (file:///home/michael/Code/wasm-add)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.54 secs
+     Running target/debug/deps/wasm_add-5d5676e23e39dbea
+running 1 test
+test it_works ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+</code></pre>
+<p>Yay it all works! Notice we didn't add a test for <code>alert_add</code>. This is because Rust won't know what
+<code>alert</code> is unless the wasm code is running in the browser! Don't worry though. Once we package this
+code up and upload it to npm we'll then test out that function to make sure everything works like we
+expect it too!</p>
+<p>You can find all of the above code <a href="https://github.com/mgattozzi/wasm-add">here</a>.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./wasm-pack/initialize.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./wasm-pack/package-code.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./wasm-pack/initialize.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./wasm-pack/package-code.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

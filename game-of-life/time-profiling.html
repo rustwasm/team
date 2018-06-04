@@ -1,0 +1,645 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Time Profiling - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./background-and-concepts.html"><strong>2.</strong> Background And Concepts</a></li><li><a href="./setup.html"><strong>3.</strong> Setup</a></li><li><a href="./hello-world.html"><strong>4.</strong> Hello World</a></li><li><a href="./tools.html"><strong>5.</strong> Tools</a></li><li><a href="./workflows.html"><strong>6.</strong> Workflows</a></li><li><a href="./js-ffi.html"><strong>7.</strong> JavaScript Interoperation</a></li><li><a href="./tutorials.html"><strong>8.</strong> Tutorials</a></li><li><ul class="section"><li><a href="./game-of-life/introduction.html"><strong>8.1.</strong> Conway's Game of Life</a></li><li><ul class="section"><li><a href="./game-of-life/setup.html"><strong>8.1.1.</strong> Setup</a></li><li><a href="./game-of-life/rules.html"><strong>8.1.2.</strong> Rules</a></li><li><a href="./game-of-life/implementing.html"><strong>8.1.3.</strong> Implementing Life</a></li><li><a href="./game-of-life/debugging.html"><strong>8.1.4.</strong> Debugging</a></li><li><a href="./game-of-life/interactivity.html"><strong>8.1.5.</strong> Adding Interactivity</a></li><li><a href="./game-of-life/time-profiling.html" class="active"><strong>8.1.6.</strong> Time Profiling</a></li><li><a href="./game-of-life/code-size.html"><strong>8.1.7.</strong> Shrinking <code>.wasm</code> Size</a></li><li><a href="./game-of-life/publishing.html"><strong>8.1.8.</strong> Publishing</a></li></ul></li><li><a href="./wasm-pack/introduction.html"><strong>8.2.</strong> wasm-pack</a></li><li><ul class="section"><li><a href="./wasm-pack/setup.html"><strong>8.2.1.</strong> Setup</a></li><li><a href="./wasm-pack/initialize.html"><strong>8.2.2.</strong> Project Initialization</a></li><li><a href="./wasm-pack/rust-code.html"><strong>8.2.3.</strong> Rust Code</a></li><li><a href="./wasm-pack/package-code.html"><strong>8.2.4.</strong> Package Code For npm</a></li><li><a href="./wasm-pack/run-the-code.html"><strong>8.2.5.</strong> Run The Code From npm</a></li><li><a href="./wasm-pack/next-steps.html"><strong>8.2.6.</strong> Next Steps</a></li></ul></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="./game-of-life/time-profiling.html#time-profiling" id="time-profiling"><h1>Time Profiling</h1></a>
+<p>This chapter introduces how to profile Web pages using Rust and WebAssembly
+where the goal is improving throughput or latency.</p>
+<blockquote>
+<p>⚡ Always make sure you are using a <code>--release</code> build when profiling! With our
+project template, that means using <code>npm run build-release</code> instead of <code>npm run build-debug</code>.</p>
+</blockquote>
+<a class="header" href="./game-of-life/time-profiling.html#available-tools" id="available-tools"><h2>Available Tools</h2></a>
+<a class="header" href="./game-of-life/time-profiling.html#the-performancenow-timer" id="the-performancenow-timer"><h3>The <code>performance.now()</code> Timer</h3></a>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now"><code>performance.now()</code></a> function returns a monotonic timestamp
+measured in milliseconds since the Web page was loaded. We can use it to time
+various operations, and we can access it from Rust with the following
+<code>wasm_bindgen</code> import declaration:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[wasm_bindgen]
+extern {
+    #[wasm_bindgen(js_namespace = performance)]
+    fn now() -&gt; f64;
+}
+#}</code></pre></pre>
+<p>Calling <code>performance.now</code> has very little overhead, so we can create simple
+measurements from it without distorting the performance of the rest of the
+system.</p>
+<p>For example, we can create a simple FPS counter that we update on each iteration
+of our <code>renderLoop</code>:</p>
+<pre><code class="language-js">const fps = new class {
+  constructor() {
+    this.fps = document.getElementById(&quot;fps&quot;);
+    this.frames = [];
+    this.lastFrameTimeStamp = performance.now();
+  }
+
+  render() {
+    // Convert the delta time since the last frame render into a measure
+    // of frames per second.
+    const now = performance.now();
+    const delta = now - this.lastFrameTimeStamp;
+    this.lastFrameTimeStamp = now;
+    const fps = 1 / delta * 1000;
+
+    // Save only the latest 100 timings.
+    this.frames.push(fps);
+    if (this.frames.length &gt; 100) {
+      this.frames.shift();
+    }
+
+    // Find the max, min, and mean of our 100 latest timings.
+    let min = Infinity;
+    let max = -Infinity;
+    let sum = 0;
+    for (let i = 0; i &lt; this.frames.length; i++) {
+      sum += this.frames[i];
+      min = Math.min(this.frames[i], min);
+      max = Math.max(this.frames[i], max);
+    }
+    let mean = sum / this.frames.length;
+
+    // Render the statistics.
+    this.fps.textContent = `
+Frames per Second:
+         latest = ${Math.round(fps)}
+avg of last 100 = ${Math.round(mean)}
+min of last 100 = ${Math.round(min)}
+max of last 100 = ${Math.round(max)}
+`.trim();
+  }
+};
+</code></pre>
+<a class="header" href="./game-of-life/time-profiling.html#developer-tools-profilers" id="developer-tools-profilers"><h3>Developer Tools Profilers</h3></a>
+<p>All Web browsers' builtin developer tools include a profiler. These profilers
+display which functions are taking the most time with the usual kinds of
+visualizations like call trees and flame graphs. If you <a href="/game-of-life/debugging.html#building-with-debug-symbols">build with debug
+symbols</a>, then these profilers should display the Rust function names
+instead of something like <code>wasm-function[123]</code>. Note that these profilers
+<em>won't</em> show inlined functions, and since Rust and LLVM rely on inlining so
+heavily, the results might end up a bit perplexing.</p>
+<p><a href="./images/game-of-life/profiler-with-rust-names.png"><img src="./images/game-of-life/profiler-with-rust-names.png" alt="Screenshot of profiler with Rust symbols" /></a></p>
+<a class="header" href="./game-of-life/time-profiling.html#resources" id="resources"><h4>Resources</h4></a>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Tools/Performance">Firefox Developer Tools — Performance</a></li>
+<li><a href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide/performance">Microsoft Edge Developer Tools — Performance</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/rendering-tools/js-execution">Chrome DevTools JavaScript Profiler</a></li>
+</ul>
+<a class="header" href="./game-of-life/time-profiling.html#the-consoletime-and-consoletimeend-functions" id="the-consoletime-and-consoletimeend-functions"><h3>The <code>console.time</code> and <code>console.timeEnd</code> Functions</h3></a>
+<p>The <code>console.time</code> and <code>console.timeEnd</code> functions allow you to log the timing
+of named operations to the browser's developer tools console.</p>
+<p>You can import them into Rust with this <code>wasm-bindgen</code> declaration:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[wasm_bindgen]
+extern {
+    #[wasm_bindgen(js_namespace = console)]
+    fn time(name: &amp;str);
+
+    #[wasm_bindgen(js_namespace = console)]
+    fn timeEnd(name: &amp;str);
+}
+#}</code></pre></pre>
+<p>Because there should be a corresponding <code>console.timeEnd</code> invocation for every
+<code>console.time</code> call, it is convenient to wrap them both up in an RAII type:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct Timer&lt;'a&gt; {
+    name: &amp;'a str,
+}
+
+impl&lt;'a&gt; Timer&lt;'a&gt; {
+    pub fn new(name: &amp;'a str) -&gt; Timer&lt;'a&gt; {
+        time(name);
+        Timer { name }
+    }
+}
+
+impl&lt;'a&gt; Drop for Timer&lt;'a&gt; {
+    fn drop(&amp;mut self) {
+        timeEnd(self.name);
+    }
+}
+#}</code></pre></pre>
+<p>Then, we can time how long each <code>Universe::tick</code> takes by adding this snippet to
+the top of the method:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let _timer = Timer::new(&quot;Universe::tick&quot;);
+#}</code></pre></pre>
+<p>The time of how long each call to <code>Universe::tick</code> took are now logged in the
+console:</p>
+<p><a href="./images/game-of-life/console-time.png"><img src="./images/game-of-life/console-time.png" alt="Screenshot of console.time logs" /></a></p>
+<p>Additionally, <code>console.time</code> and <code>console.timeEnd</code> pairs will show up in your
+browser's profiler's &quot;timeline&quot; or &quot;waterfall&quot; view:</p>
+<p><a href="./images/game-of-life/console-time-in-profiler.png"><img src="./images/game-of-life/console-time-in-profiler.png" alt="Screenshot of console.time logs" /></a></p>
+<a class="header" href="./game-of-life/time-profiling.html#using-bench-with-native-code" id="using-bench-with-native-code"><h3>Using <code>#[bench]</code> with Native Code</h3></a>
+<p>The same way we can often leverage our operating system's native code debugging
+tools by writing <code>#[test]</code>s rather than debugging on the Web, we can leverage
+our operating system's native code profiling tools by writing <code>#[bench]</code>
+functions.</p>
+<p>However! Make sure that you know the bottleneck is in the WebAssembly before
+investing much energy in native code profiling! Use your browser's profiler to
+confirm this, or else you risk wasting your time optimizing code that isn't hot.</p>
+<a class="header" href="./game-of-life/time-profiling.html#growing-our-game-of-life-universe" id="growing-our-game-of-life-universe"><h2>Growing our Game of Life Universe</h2></a>
+<p>What happens if we make our Game of Life universe larger? Replacing the 64 by 64
+universe with a 128 by 128 universe results in FPS dropping from a smooth 60 to
+a choppy 40-ish on my machine.</p>
+<p>If we record a profile and look at the waterfall view, we see that each
+animation frame is taking over 20 milliseconds. Recall that 60 frames per second
+leaves sixteen milliseconds for the whole process of rendering a frame. That's
+not just our JavaScript and WebAssembly, but also everything else the browser is
+doing, such as painting.</p>
+<p><a href="./images/game-of-life/drawCells-before-waterfall.png"><img src="./images/game-of-life/drawCells-before-waterfall.png" alt="Screenshot of a waterfall view of rendering a frame" /></a></p>
+<p>If we look at what happens within a single animation frame, we see that the
+<code>CanvasRenderingContext2D.fillStyle</code> setter is very expensive!</p>
+<p><a href="./images/game-of-life/drawCells-before-flamegraph.png"><img src="./images/game-of-life/drawCells-before-flamegraph.png" alt="Screenshot of a flamegraph view of rendering a frame" /></a></p>
+<p>And we can confirm that this isn't an abnormality by looking at the call tree's
+aggregation of many frames:</p>
+<p><a href="./images/game-of-life/drawCells-before-calltree.png"><img src="./images/game-of-life/drawCells-before-calltree.png" alt="Screenshot of a flamegraph view of rendering a frame" /></a></p>
+<p>Nearly 40% of our time is spent in this setter!</p>
+<blockquote>
+<p>⚡ We might have expected something in the <code>tick</code> method to be the performance
+bottleneck, but it wasn't. Always let profiling guide your focus, since time
+may be spent in places you don't expect it to be.</p>
+</blockquote>
+<p>In the <code>drawCells</code> function, <code>fillStyle</code> is set once for every cell in the
+universe, on every animation frame:</p>
+<pre><code class="language-js">for (let row = 0; row &lt; height; row++) {
+  for (let col = 0; col &lt; width; col++) {
+    const idx = getIndex(row, col);
+
+    ctx.fillStyle = cells[idx] === DEAD
+      ? DEAD_COLOR
+      : ALIVE_COLOR;
+
+    ctx.fillRect(
+      col * (CELL_SIZE + 1) + 1,
+      row * (CELL_SIZE + 1) + 1,
+      CELL_SIZE,
+      CELL_SIZE
+    );
+  }
+}
+</code></pre>
+<p>Now that we have discovered that setting <code>fillStyle</code> is so expensive, what can
+we do to avoid setting it so often? We need to change <code>fillStyle</code> depending on
+whether a cell is alive or dead. If we set <code>fillStyle = ALIVE_COLOR</code> and then
+draw every alive cell in one pass, and then set <code>fillStyle = DEAD_COLOR</code> and
+draw every dead cell in another pass, then we only end setting <code>fillStyle</code>
+twice, rather than once for every cell.</p>
+<pre><code class="language-js">// Alive cells.
+ctx.fillStyle = ALIVE_COLOR;
+for (let row = 0; row &lt; height; row++) {
+  for (let col = 0; col &lt; width; col++) {
+    const idx = getIndex(row, col);
+    if (cells[idx] !== ALIVE) {
+      continue;
+    }
+
+    ctx.fillRect(
+      col * (CELL_SIZE + 1) + 1,
+      row * (CELL_SIZE + 1) + 1,
+      CELL_SIZE,
+      CELL_SIZE
+    );
+  }
+}
+
+// Dead cells.
+ctx.fillStyle = DEAD_COLOR;
+for (let row = 0; row &lt; height; row++) {
+  for (let col = 0; col &lt; width; col++) {
+    const idx = getIndex(row, col);
+    if (cells[idx] !== DEAD) {
+      continue;
+    }
+
+    ctx.fillRect(
+      col * (CELL_SIZE + 1) + 1,
+      row * (CELL_SIZE + 1) + 1,
+      CELL_SIZE,
+      CELL_SIZE
+    );
+  }
+}
+</code></pre>
+<p>After saving these changes and refreshing
+<a href="http://localhost:8080/">http://localhost:8080/</a>, rendering is back to a smooth
+60 frames per second.</p>
+<p>If we take another profile, we can see that only about ten milliseconds are
+spent in each animation frame now.</p>
+<p><a href="./images/game-of-life/drawCells-after-waterfall.png"><img src="./images/game-of-life/drawCells-after-waterfall.png" alt="Screenshot of a waterfall view of rendering a frame after the drawCells changes" /></a></p>
+<p>Breaking down a single frame, we see that the <code>fillStyle</code> cost is gone, and most
+of our frame's time is spent within <code>fillRect</code>, drawing each cell's rectangle.</p>
+<p><a href="./images/game-of-life/drawCells-after-flamegraph.png"><img src="./images/game-of-life/drawCells-after-flamegraph.png" alt="Screenshot of a flamegraph view of rendering a frame after the drawCells changes" /></a></p>
+<a class="header" href="./game-of-life/time-profiling.html#making-time-run-faster" id="making-time-run-faster"><h2>Making Time Run Faster</h2></a>
+<p>Some folks don't like waiting around, and would prefer if instead of one tick of
+the universe occurred per animation frame, nine ticks did. We can modify the
+<code>renderLoop</code> function in <code>index.js</code> to do this quite easily:</p>
+<pre><code class="language-js">for (let i = 0; i &lt; 9; i++) {
+  universe.tick();
+}
+</code></pre>
+<p>On my machine, this brings us back down to only 35 frames per second. No
+good. We want that buttery 60!</p>
+<p>Now we know that time is being spent in <code>Universe::tick</code>, so let's add some
+<code>Timer</code>s to wrap various bits of it in <code>console.time</code> and <code>console.timeEnd</code>
+calls, and see where that leads us. My hypothesis is that allocating a new
+vector of cells and freeing the old vector on every tick is costly, and taking
+up a significant portion of our time budget.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn tick(&amp;mut self) {
+    let _timer = Timer::new(&quot;Universe::tick&quot;);
+
+    let mut next = {
+        let _timer = Timer::new(&quot;allocate next cells&quot;);
+        self.cells.clone()
+    };
+
+    {
+        let _timer = Timer::new(&quot;new generation&quot;);
+        for row in 0..self.height {
+            for col in 0..self.width {
+                let idx = self.get_index(row, col);
+                let cell = self.cells[idx];
+                let live_neighbors = self.live_neighbor_count(row, col);
+
+                let next_cell = match (cell, live_neighbors) {
+                    // Rule 1: Any live cell with fewer than two live neighbours
+                    // dies, as if caused by underpopulation.
+                    (Cell::Alive, x) if x &lt; 2 =&gt; Cell::Dead,
+                    // Rule 2: Any live cell with two or three live neighbours
+                    // lives on to the next generation.
+                    (Cell::Alive, 2) | (Cell::Alive, 3) =&gt; Cell::Alive,
+                    // Rule 3: Any live cell with more than three live
+                    // neighbours dies, as if by overpopulation.
+                    (Cell::Alive, x) if x &gt; 3 =&gt; Cell::Dead,
+                    // Rule 4: Any dead cell with exactly three live neighbours
+                    // becomes a live cell, as if by reproduction.
+                    (Cell::Dead, 3) =&gt; Cell::Alive,
+                    // All other cells remain in the same state.
+                    (otherwise, _) =&gt; otherwise,
+                };
+
+                next[idx] = next_cell;
+            }
+        }
+    }
+
+    let _timer = Timer::new(&quot;free old cells&quot;);
+    self.cells = next;
+}
+#}</code></pre></pre>
+<p>Looking at the timings, it is clear that my hypothesis is incorrect: the vast
+majority of time is spent actually calculating the next generation of
+cells. Allocating and freeing a vector on every tick appears to have negligible
+cost, surprisingly. Another reminder to always guide our efforts with profiling!</p>
+<p><a href="./images/game-of-life/console-time-in-universe-tick.png"><img src="./images/game-of-life/console-time-in-universe-tick.png" alt="Screenshot of a Universe::tick timer results" /></a></p>
+<p>Let's write a native code <code>#[bench]</code> doing the same thing that our WebAssembly
+is doing, but where we can use more mature profiling tools. Here is the new
+<code>benches/bench.rs</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(test)]
+
+#fn main() {
+extern crate test;
+extern crate wasm_game_of_life;
+
+#[bench]
+fn universe_ticks(b: &amp;mut test::Bencher) {
+    let mut universe = wasm_game_of_life::Universe::new();
+
+    b.iter(|| {
+        universe.tick();
+    });
+}
+#}</code></pre></pre>
+<p>We also have to comment out all the <code>#[wasm_bindgen]</code> annotations, and the
+<code>&quot;cdylib&quot;</code> bits from <code>Cargo.toml</code> or else building native code will fail and
+have link errors.</p>
+<p>With all that in place, we can run <code>cargo bench</code> to compile and run our
+benchmark!</p>
+<pre><code>$ cargo bench
+    Finished release [optimized + debuginfo] target(s) in 0.0 secs
+     Running target/release/deps/wasm_game_of_life-91574dfbe2b5a124
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+     Running target/release/deps/bench-8474091a05cfa2d9
+
+running 1 test
+test universe_ticks ... bench:     664,421 ns/iter (+/- 51,926)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 0 filtered out
+</code></pre>
+<p>This also tells us where the binary lives, and we can run the benchmarks again,
+but this time under our operating system's profiler. In my case, I'm running
+Linux, so <code>perf</code> is the profiler I'll use:</p>
+<pre><code>$ perf record -g target/release/deps/bench-8474091a05cfa2d9 --bench
+running 1 test
+test universe_ticks ... bench:     635,061 ns/iter (+/- 38,764)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 0 filtered out
+
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.178 MB perf.data (2349 samples) ]
+</code></pre>
+<p>Loading up the profile with <code>perf report</code> shows that all of our time is spent in
+<code>Universe::tick</code>, as expected:</p>
+<p><a href="./images/game-of-life/bench-perf-report.png"><img src="./images/game-of-life/bench-perf-report.png" alt="Screenshot of perf report" /></a></p>
+<p><code>perf</code> will annotate which instructions in a function time is being spent at if
+you press <code>a</code>:</p>
+<p><a href="./images/game-of-life/bench-perf-annotate.png"><img src="./images/game-of-life/bench-perf-annotate.png" alt="Screenshot of perf's instruction annotation" /></a></p>
+<p>This tells us that 26.67% of time is being spent summing neighboring cells'
+values, 23.41% of time is spent getting the neighbor's column index, and another
+15.42% of time is spent getting the neighbor's row index. Of these top three
+most expensive instructions, the second and third are both costly <code>div</code>
+instructions. These <code>div</code>s implement the modulo indexing logic in
+<code>Universe::live_neighbor_count</code>.</p>
+<p>Recall the <code>live_neighbor_count</code> definition:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn live_neighbor_count(&amp;self, row: u32, column: u32) -&gt; u8 {
+    let mut count = 0;
+    for delta_row in [self.height - 1, 0, 1].iter().cloned() {
+        for delta_col in [self.width - 1, 0, 1].iter().cloned() {
+            if delta_row == 0 &amp;&amp; delta_col == 0 {
+                continue;
+            }
+
+            let neighbor_row = (row + delta_row) % self.height;
+            let neighbor_col = (column + delta_col) % self.width;
+            let idx = self.get_index(neighbor_row, neighbor_col);
+            count += self.cells[idx] as u8;
+        }
+    }
+    count
+}
+#}</code></pre></pre>
+<p>The reason we used modulo was to avoid cluttering up the code with <code>if</code> branches
+for the first or last row or column edge cases. But we are paying the cost of a
+<code>div</code> instruction even for the most common case, when neither <code>row</code> nor <code>column</code>
+is on the edge of the universe and they don't need the modulo wrapping
+treatment. Instead, if we use <code>if</code>s for the edge cases and unroll this loop, the
+branches <em>should</em> be very well-predicted by the CPU's branch predictor.</p>
+<p>Let's rewrite <code>live_neighbor_count</code> like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn live_neighbor_count(&amp;self, row: u32, column: u32) -&gt; u8 {
+    let mut count = 0;
+
+    let north = if row == 0 {
+        self.height - 1
+    } else {
+        row - 1
+    };
+
+    let south = if row == self.height - 1 {
+        0
+    } else {
+        row + 1
+    };
+
+    let west = if column == 0 {
+        self.width - 1
+    } else {
+        column - 1
+    };
+
+    let east = if column == self.width - 1 {
+        0
+    } else {
+        column + 1
+    };
+
+    let nw = self.get_index(north, west);
+    count += self.cells[nw] as u8;
+
+    let n = self.get_index(north, column);
+    count += self.cells[n] as u8;
+
+    let ne = self.get_index(north, east);
+    count += self.cells[ne] as u8;
+
+    let w = self.get_index(row, west);
+    count += self.cells[w] as u8;
+
+    let e = self.get_index(row, east);
+    count += self.cells[e] as u8;
+
+    let sw = self.get_index(south, west);
+    count += self.cells[sw] as u8;
+
+    let s = self.get_index(south, column);
+    count += self.cells[s] as u8;
+
+    let se = self.get_index(south, east);
+    count += self.cells[se] as u8;
+
+    count
+}
+#}</code></pre></pre>
+<p>Now let's run the benchmarks again!</p>
+<pre><code>$ cargo bench
+   Compiling wasm_game_of_life v0.1.0 (file:///home/fitzgen/wasm_game_of_life)
+    Finished release [optimized + debuginfo] target(s) in 0.82 secs
+     Running target/release/deps/wasm_game_of_life-91574dfbe2b5a124
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+     Running target/release/deps/bench-8474091a05cfa2d9
+
+running 1 test
+test universe_ticks ... bench:      87,258 ns/iter (+/- 14,632)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 0 filtered out
+</code></pre>
+<p>That looks a whole lot better! We can see just how much better it is with the
+<a href="https://github.com/BurntSushi/cargo-benchcmp"><code>cargo benchcmp</code></a> tool:</p>
+<pre><code>$ cargo benchcmp before.txt after.txt
+ name            before.txt ns/iter  after.txt ns/iter  diff ns/iter   diff %  speedup
+ universe_ticks  664,421             87,258                 -577,163  -86.87%   x 7.61
+</code></pre>
+<p>Wow! 7.61x speed up!</p>
+<p>WebAssembly intentionally maps closely to common hardware architectures, but we
+do need to make sure that this native code speed up translates into a
+WebAssembly speed up as well.</p>
+<p>Let's reinstate all the <code>#[wasm_bindgen]</code> annotations, rebuild the <code>.wasm</code> with
+<code>npm run build-release</code>, and refresh
+<a href="http://localhost:8080/">http://localhost:8080/</a>. On my machine, the page is
+running at 60 frames per second again, and recording another profile with the
+browser's profiler reveals that each animation frame is taking about ten
+milliseconds.</p>
+<p>Success!</p>
+<p><a href="./images/game-of-life/waterfall-after-branches-and-unrolling.png"><img src="./images/game-of-life/waterfall-after-branches-and-unrolling.png" alt="Screenshot of a waterfall view of rendering a frame after replacing modulos with branches" /></a></p>
+<a class="header" href="./game-of-life/time-profiling.html#exercises" id="exercises"><h2>Exercises</h2></a>
+<ul>
+<li>
+<p>At this point, the next lowest hanging fruit for speeding up <code>Universe::tick</code>
+is removing the allocation and free. Implement double buffering of cells,
+where the <code>Universe</code> maintains two vectors, never frees either of them, and
+never allocates new buffers in <code>tick</code>.</p>
+</li>
+<li>
+<p>Implement the alternative, delta-based design from the &quot;Implementing Life&quot;
+chapter, where the Rust code returns a list of cells that changed states to
+JavaScript. Does this make rendering to <code>&lt;canvas&gt;</code> faster? Can you implement
+this design without allocating a new list of deltas on every tick?</p>
+</li>
+<li>
+<p>As our profiling has shown us, 2D <code>&lt;canvas&gt;</code> rendering is not particularly
+fast. Replace the 2D canvas renderer with a WebGL renderer. How much faster is
+the WebGL version? How large can you make the universe before WebGL rendering
+is a bottleneck?</p>
+</li>
+</ul>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="./game-of-life/interactivity.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="./game-of-life/code-size.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./game-of-life/interactivity.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./game-of-life/code-size.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>
