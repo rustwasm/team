@@ -91,10 +91,10 @@ bundler ecosystem to look something like this:
 
 [irc]: irc://irc.mozilla.org#rust-wasm
 [web chat]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
-[file-issue]: https://github.com/rust-lang-nursery/rust-wasm/issues/new
+[file-issue]: https://github.com/rustwasm/team/issues/new
 [o-wasm]: https://github.com/rust-lang/rust/labels/O-wasm
-[tooling]: https://github.com/rust-lang-nursery/rust-wasm/issues/10
-[issues]: https://github.com/rust-lang-nursery/rust-wasm/issues
+[tooling]: https://github.com/rustwasm/team/issues/10
+[issues]: https://github.com/rustwasm/team/issues
 [wasm-bindgen]: https://github.com/alexcrichton/wasm-bindgen
 [wasm-bindgen-design]: https://github.com/alexcrichton/wasm-bindgen/blob/master/DESIGN.md
 [wasm-bindgen-issues]: https://github.com/alexcrichton/wasm-bindgen/issues
@@ -189,9 +189,9 @@ way][bundlers].
 [WebPack]: https://webpack.js.org/
 [Parcel]: https://parceljs.org/
 [bundlers]: https://github.com/aturon/rust-wasm/issues/8
-[metadata]: https://github.com/rust-lang-nursery/rust-wasm/issues/34
-[rust-deps]: https://github.com/rust-lang-nursery/rust-wasm/issues/36
-[npm-publish]: https://github.com/rust-lang-nursery/rust-wasm/issues/35
+[metadata]: https://github.com/rustwasm/team/issues/34
+[rust-deps]: https://github.com/rustwasm/team/issues/36
+[npm-publish]: https://github.com/rustwasm/team/issues/35
 
 ### The DOM, GC integration, and more
 
