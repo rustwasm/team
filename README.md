@@ -1,3 +1,5 @@
+<meta charset="utf-8"/>
+
 # Rust + WebAssembly = 💖
 
 This repo aims to be a simple, organic means of coordinating work on using Rust
@@ -26,35 +28,43 @@ and WebAssembly together.
 **Compiling Rust to WebAssembly should be *the* best choice for fast code for
 the Web.**
 
-JavaScript Web applications struggle to reliably hit 60 fps. JavaScript's
-dynamic type system and garbage collection pauses don't help. Modern JITs do
-what they can, but are still unreliable. Seemingly small code changes can result
-in drastic performance regressions if you accidentally wander off the JIT's
-happy path.
+JavaScript Web applications struggle to attain reliable performance.
+JavaScript's dynamic type system and garbage collection pauses don't
+help. Seemingly small code changes can result in drastic performance regressions
+if you accidentally wander off the JIT's happy path.
 
 Rust gives programmers low-level control and reliable performance. It is free
-from the non-deterministic GC pauses that JavaScript suffers. And now
-WebAssembly lets us bring Rust's advantages to the Web.
+from the non-deterministic garbage collection pauses that plague JavaScript.
+Programmers have control over indirection, monomorphization, and memory layout.
 
-Rust is particularly well-suited for the Web. Rust's minuscule runtime enables
-small `.wasm` binary sizes and incremental adoption. Binary size is of huge
-importance since the `.wasm` must be downloaded over the network. Incrementality
-means that existing code bases don't need to be thrown away: programmers can
-start by porting their most performance-sensitive JavaScript functions to Rust
-to gain immediate benefits. Furthermore, Rust has many of the amenities that Web
-developers have come to expect, such as strong package management, expressive
-abstractions, and a welcoming community.
+And now we can bring Rust's advantages to the Web with WebAssembly.
 
-Let's make it happen!
+**Rust is particularly well-suited for the Web.**
 
-*See also [Rust and the case for WebAssembly in 2018.][case-for-wasm]*
+Rust's minuscule runtime enables small `.wasm` sizes and incremental or partial
+adoption.
+
+* Small `.wasm` sizes: Code size is incredibly important since the `.wasm` must
+be downloaded over the network.
+
+* Incremental or partial adoption: Existing code bases don't need to be thrown
+away. Programmers can start by porting their most performance-sensitive
+JavaScript functions to Rust to gain immediate benefits. And they can even stop
+there if they want to, because Rust plays well with others.
+
+Furthermore, Rust has many of the amenities that Web developers have come to
+expect:
+
+* strong package management with `cargo`,
+
+* expressive (and zero-cost!) abstractions,
+
+* and a welcoming community 😊
 
 We envision the pipeline that fits Rust into JavaScript package management and
 bundler ecosystem to look something like this:
 
 <img alt="Rust to WebAssembly to NPM to bundler to Webpage pipeline" src="./pipeline.png"/>
-
-[case-for-wasm]: https://mgattozzi.com/rust-wasm
 
 # Get Involved!
 
@@ -128,7 +138,7 @@ Each of the wasm targets has a different story with respect to `std`:
 
 - For `wasm32-unknown-emscripten`, Rust uses the emscripten toolchain to provide
   libc-based functionality. That means that a lot of `std` is available and
-  works, but at the cost of significant binary bloat.
+  works, but at the cost of significant `.wasm` size bloat.
 
 ## JS Interop
 
