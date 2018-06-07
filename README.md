@@ -84,6 +84,22 @@ roadblock, [let us know by filing an issue!][file-issue]
 
 ## 3. Join the Rust and WebAssembly Working Group
 
+We are building a Rust and WebAssembly future where:
+
+* The Web is the primary target.
+* Rust plays nice with JavaScript, and can surgically replace a
+  performance-sensitive JavaScript module or function without throwing away the
+  existing code base.
+
+We are not focusing on (but still encourage others to experiment with) scenarios
+where:
+
+* The Web is not the primary target (e.g. WebAssembly as a universal binary
+  format, or an operating system that runs WebAsssembly processes instead of
+  native code).
+* A Web application is written in pure Rust, without integrating with any
+  JavaScript.
+
 We meet on Google Hangouts every two weeks to track progress, give status
 updates, and discuss issues. We coordinate meetings with [issues labeled
 "meeting" in the `rustwasm/team` repository][meetings].
