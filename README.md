@@ -64,7 +64,8 @@ bundler ecosystem to look something like this:
 
 # Get Involved!
 
-Get involved with the Rust and WebAssembly community in three easy steps!
+Get involved with the Rust and WebAssembly community in just **three easy
+steps!**
 
 ## 1. Join our IRC Chat
 
@@ -78,8 +79,8 @@ Say "hello" and introduce yourself!
 
 ## 2. Do some Rust and WebAssembly Yourself
 
-Read our short [Rust and WebAssembly book][book], complete the [tutorials][],
-and compile some Rust into WebAssembly. If you ran into a paper cut or
+Read our short [Rust and WebAssembly book][book], complete its [tutorials][],
+and compile some Rust into WebAssembly. If you run into a paper cut or
 roadblock, [let us know by filing an issue!][file-issue]
 
 ## 3. Join the Rust and WebAssembly Working Group
