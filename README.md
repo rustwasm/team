@@ -2,8 +2,12 @@
 
 # Rust + WebAssembly = 💖
 
-This repo aims to be a simple, organic means of coordinating work on using Rust
+This repository is a simple, organic means of coordinating work on using Rust
 and WebAssembly together.
+
+<!--
+doctoc README.md --maxlevel 1
+-->
 
 <!-- Generated with https://github.com/thlorenz/doctoc -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -68,39 +72,61 @@ bundler ecosystem to look something like this:
 
 # Get Involved!
 
-* Join us on IRC at [`#rust-wasm` on `irc.mozilla.org`][irc] ([web chat])
+Get involved with the Rust and WebAssembly community in three easy steps!
 
-* Read the book, compile some Rust into WebAssembly, and if you ran into a paper
-  cut or roadblock, [let us know by filing an issue!][file-issue]
+## 1. Join our IRC Chat
 
-* [Help write the Rust and WebAssembly book](#rust-and-webassembly-book)
+Chat with the Rust and WebAssembly community on IRC at [`#rust-wasm` on
+`irc.mozilla.org`][irc].
 
-* [Fix WebAssembly-specific issues in `rustc`][o-wasm]
+If you don't have an IRC client of choice already, you can use the [Mibbit Web
+IRC client][irc-web-client].
 
-* [Write tooling for WebAssembly][tooling]
+Say "hello" and introduce yourself!
 
-    * [`wasm-bindgen` is a project for facilitating high-level interactions between wasm modules and JS.][wasm-bindgen]
-        * [Design][wasm-bindgen-design]
-        * [Open Issues][wasm-bindgen-issues]
+## 2. Do some Rust and WebAssembly Yourself
 
-    * [`twiggy` is a code size profiler for WebAssembly.][twiggy]
-        * [Contributing][twiggy-contributing]
-        * [Open Issues][twiggy-issues]
+Read our short [Rust and WebAssembly book][book], complete the [tutorials][],
+and compile some Rust into WebAssembly. If you ran into a paper cut or
+roadblock, [let us know by filing an issue!][file-issue]
 
-* Take a look at [this repo's open issues][issues]
+## 3. Join the Rust and WebAssembly Working Group
 
+We meet on Google Hangouts every two weeks to track progress, give status
+updates, and discuss issues. We coordinate meetings with [issues labeled
+"meeting" in the `rustwasm/team` repository][meetings].
+
+First get your feet wet by tackling one of these issues:
+
+* [Issues labeled "good first issue" in the `rustwasm/*` repositories][good-first-issue]
+
+* [Issues labeled "help wanted" in the `rustwasm/*` repositories.][help-wanted]
+
+Then help us make progress on the working group goals:
+
+| Goal                           | Owner     | More Information |
+|--------------------------------|-----------|------------------|
+| `wasm-bindgen` ecosystem       | fitzgen   |                  |
+| Publishing and Dependencies    | ag_dubs   |                  |
+| Bundler Integration            | xtuc      |                  |
+| Book, Documentation, Tutorials | mgattozzi |                  |
+| Website                        | fitzgen   |                  |
+| Debugging                      | fitzgen   |                  |
+| Templates                      | fitzgen   |                  |
+| Testing                        | ?         |                  |
+| Benchmarking                   | ?         |                  |
+
+See also [`GOVERNANCE.md#membership`][membership].
+
+[help-wanted]: https://github.com/issues?q=is%3Aopen+is%3Aissue+user%3Arustwasm+archived%3Afalse+label%3A%22help+wanted%22
+[good-first-issue]: https://github.com/issues?q=is%3Aopen+is%3Aissue+user%3Arustwasm+archived%3Afalse+label%3A%22good+first+issue%22
+[meetings]: https://github.com/issues?utf8=%E2%9C%93&q=user%3Arustwasm+label%3Ameeting+
+[membership]: https://github.com/rustwasm/team/blob/master/GOVERNANCE.md#membership
+[book]: https://rustwasm.github.io/book
+[tutorials]: https://rustwasm.github.io/book/tutorials.html
 [irc]: irc://irc.mozilla.org#rust-wasm
-[web chat]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
+[irc-web-client]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
 [file-issue]: https://github.com/rustwasm/team/issues/new
-[o-wasm]: https://github.com/rust-lang/rust/labels/O-wasm
-[tooling]: https://github.com/rustwasm/team/issues/10
-[issues]: https://github.com/rustwasm/team/issues
-[wasm-bindgen]: https://github.com/alexcrichton/wasm-bindgen
-[wasm-bindgen-design]: https://github.com/alexcrichton/wasm-bindgen/blob/master/DESIGN.md
-[wasm-bindgen-issues]: https://github.com/alexcrichton/wasm-bindgen/issues
-[twiggy]: https://github.com/rustwasm/twiggy
-[twiggy-contributing]: https://github.com/rustwasm/twiggy/blob/master/CONTRIBUTING.md
-[twiggy-issues]: https://github.com/rustwasm/twiggy/issues
 
 # Status
 
