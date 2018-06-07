@@ -94,21 +94,24 @@ First get your feet wet by tackling one of these issues:
 
 * [Issues labeled "help wanted" in the `rustwasm/*` repositories.][help-wanted]
 
-Then help us make progress on the working group goals:
+Then help us make progress on the working group goals. To learn more about or
+contribute towards a particular goal, read its `goals/*.md` page and its "How to
+Help" section. If you have any questions about a goal, contact its owner.
 
-| Goal                           | Owner     | More Information |
-|--------------------------------|-----------|------------------|
-| `wasm-bindgen` ecosystem       | fitzgen   |                  |
-| Publishing and Dependencies    | ag_dubs   |                  |
-| Bundler Integration            | xtuc      |                  |
-| Book, Documentation, Tutorials | mgattozzi |                  |
-| Website                        | fitzgen   |                  |
-| Debugging                      | fitzgen   |                  |
-| Templates                      | fitzgen   |                  |
-| Testing                        | ?         |                  |
-| Benchmarking                   | ?         |                  |
+| Goal                           | More Information                                                                                                            |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `wasm-bindgen` Ecosystem       | [goals/wasm-bindgen-ecosystem.md](https://github.com/rustwasm/team/blob/master/goals/wasm-bindgen-ecosystem.md)             |
+| Publishing and Dependencies    | [goals/publishing-and-dependencies.md](https://github.com/rustwasm/team/blob/master/goals/publishing-and-dependencies.md)   |
+| Bundler Integration            | [goals/bundler-integration.md](https://github.com/rustwasm/team/blob/master/goals/bundler-integration.md)                   |
+| Book, Documentation, Tutorials | [goals/book-documentation-tutorials.md](https://github.com/rustwasm/team/blob/master/goals/book-documentation-tutorials.md) |
+| Website                        | [goals/website.md](https://github.com/rustwasm/team/blob/master/goals/website.md)                                           |
+| Debugging                      | [goals/debugging.md](https://github.com/rustwasm/team/blob/master/goals/debugging.md)                                       |
+| Project Templates              | [goals/project-templates.md](https://github.com/rustwasm/team/blob/master/goals/project-templates.md)                       |
+| Testing                        | [goals/testing.md](https://github.com/rustwasm/team/blob/master/goals/testing.md)                                           |
+| Benchmarking                   | [goals/benchmarking.md](https://github.com/rustwasm/team/blob/master/goals/benchmarking.md)                                 |
 
-See also [`GOVERNANCE.md#membership`][membership].
+Finally, if you've gotten this far, see [`GOVERNANCE.md#membership`][membership]
+for information on becoming an official member of the working group!
 
 [help-wanted]: https://github.com/issues?q=is%3Aopen+is%3Aissue+user%3Arustwasm+archived%3Afalse+label%3A%22help+wanted%22
 [good-first-issue]: https://github.com/issues?q=is%3Aopen+is%3Aissue+user%3Arustwasm+archived%3Afalse+label%3A%22good+first+issue%22
