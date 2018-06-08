@@ -21,8 +21,8 @@ Working Group's Rust 2018 Goals this means we'll want to do the following:
 
 1. Make the Game of Life tutorial the primary way to learn about Rust and Web Assembly
 2. Make the tutorial a high quality piece of documentation that makes learning effortless rather than frustrated
-3. Provide appendixes and tutorials for tools the team reccomends to use such as, but not limited to, wasm-bindgen
-   and wasm-pack
+3. Provide appendixes and tutorials for tools the team recommends to use such as, but not limited to, `wasm-bindgen`
+   and `wasm-pack`
 4. Provide troubleshooting instructions for common issues when using Rust with WebAssembly
 5. Document current blockers and known issues that might hinder development (i.e. we once had a bug where debug
    builds would not work which was surprising)
