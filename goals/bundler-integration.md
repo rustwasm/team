@@ -10,6 +10,14 @@ It should be very easy to take Rust code and integrate it into your JavaScript p
 - IRC nick: `username`
 - Email: sven@sauleau.com
 
+## Collaborators
+
+**Sendil Kumar N**
+
+- GitHub: [sendilkumarn](https://github.com/sendilkumarn)
+- IRC nick: `sendilkumarn`
+- Email: sendilkumarn@live.com
+
 ## Details
 
 Currently the focus is on the Webpack integration, we should be able to use it with Rust tooling (wasm-bindgen, wasmsnip, wasmopt, etc) for the 2018 edition. 
@@ -18,7 +26,7 @@ Currently the focus is on the Webpack integration, we should be able to use it w
 
 The integration is usable, a couple of fixes and improvements are in progress.
 
-The next goals are finishing the [rust-plugin](https://github.com/xtuc/rust-plugin) (for optimizations) and creating a loader (for compilation).
+The next goals are finishing the [rust-plugin](https://github.com/wasm-tool/rust-plugin) (for optimizations) and creating a loader (for compilation).
 
 ### Rollup
 
@@ -32,4 +40,4 @@ The current WebAssembly integration is not usable and we raised an issue: https:
 
 The project https://github.com/xtuc/webassemblyjs/ provides the tooling needed for the bundler integrations, it would be great if you can help there: [webassemblyjs](https://github.com/xtuc/webassemblyjs).
 
-We also provide a Plugin for Webpack: [rust-plugin](https://github.com/xtuc/rust-plugin).
+We also provide a Plugin for Webpack: [rust-plugin](https://github.com/wasm-tool/rust-plugin).
