@@ -1,6 +1,6 @@
 # Goal: Bundler Integration
 
-One or two sentence summary of this goal.
+It should be very easy to take Rust code and integrate it into your JavaScript project (using the same build pipeline).
 
 ## Owner
 
@@ -8,19 +8,36 @@ One or two sentence summary of this goal.
 
 - GitHub: [xtuc](https://github.com/xtuc)
 - IRC nick: `username`
-- Email: contact@xtuc.fr
+- Email: sven@sauleau.com
+
+## Collaborators
+
+**Sendil Kumar N**
+
+- GitHub: [sendilkumarn](https://github.com/sendilkumarn)
+- IRC nick: `sendilkumarn`
+- Email: sendilkumarn@live.com
 
 ## Details
 
-More details about this goal. What is in scope for the 2018 edition. What comes
-after that.
+Currently the focus is on the Webpack integration, we should be able to use it with Rust tooling (wasm-bindgen, wasmsnip, wasmopt, etc) for the 2018 edition. 
+
+### Webpack
+
+The integration is usable, a couple of fixes and improvements are in progress.
+
+The next goals are finishing the [rust-plugin](https://github.com/wasm-tool/rust-plugin) (for optimizations) and creating a loader (for compilation).
+
+### Rollup
+
+PR is progress: https://github.com/rollup/rollup/pull/2113
+
+### Parcel
+
+The current WebAssembly integration is not usable and we raised an issue: https://github.com/parcel-bundler/parcel/issues/1325. 
 
 ## How to Help
 
-Link to relevant repositories and their CONTRIBUTING.md files.
+The project https://github.com/xtuc/webassemblyjs/ provides the tooling needed for the bundler integrations, it would be great if you can help there: [webassemblyjs](https://github.com/xtuc/webassemblyjs).
 
-Link to relevant issues. Could be by label across the whole `rustwasm`
-organization (eg [0]), to a particular tracking/meta issue, or to issues within
-a specific repository.
-
-[0] https://github.com/issues?q=is%3Aopen+is%3Aissue+user%3Arustwasm+label%3A%22good+first+issue%22+
+We also provide a Plugin for Webpack: [rust-plugin](https://github.com/wasm-tool/rust-plugin).
