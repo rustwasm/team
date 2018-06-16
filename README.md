@@ -81,7 +81,7 @@ Say "hello" and introduce yourself!
 
 Read our short [Rust and WebAssembly book][book], complete its [tutorials][],
 and compile some Rust into WebAssembly. If you run into a paper cut or
-roadblock, [let us know by filing an issue!][file-issue]
+roadblock, [let us know by filing an issue!][https://github.com/rustwasm/book/issues/new]
 
 ## 3. Join the Rust and WebAssembly Working Group
 
