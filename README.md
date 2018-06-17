@@ -81,7 +81,7 @@ Say "hello" and introduce yourself!
 
 Read our short [Rust and WebAssembly book][book], complete its [tutorials][],
 and compile some Rust into WebAssembly. If you run into a paper cut or
-roadblock, [let us know by filing an issue!][file-issue]
+roadblock, [let us know by filing an issue!][file-issue-book]
 
 ## 3. Join the Rust and WebAssembly Working Group
 
@@ -139,3 +139,4 @@ for information on becoming an official member of the working group!
 [irc]: irc://irc.mozilla.org#rust-wasm
 [irc-web-client]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
 [file-issue]: https://github.com/rustwasm/team/issues/new
+[file-issue-book]: https://github.com/rustwasm/book/issues/new
