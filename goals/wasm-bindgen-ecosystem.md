@@ -39,9 +39,8 @@ As stretch or longer term goals, we should have:
 ## How to Help
 
 This work is largely happening in the [`rustwasm/wasm-bindgen`
-repository][wasm-bindgen] right now. Read its [`README.md`][readme],
-[`DESIGN.md`][design], and [`CONTRIBUTING.md`][contributing] documents to dive
-into `wasm-bindgen` development.
+repository][wasm-bindgen] right now. Read the ["Contributing"
+section][contributing] of its guide to dive into `wasm-bindgen` development.
 
 We need help with:
 
@@ -82,9 +81,7 @@ We need help with:
 
 [host-bindings]: https://github.com/WebAssembly/host-bindings/blob/master/proposals/host-bindings/Overview.md
 [wasm-bindgen]: https://github.com/rustwasm/wasm-bindgen
-[readme]: https://github.com/rustwasm/wasm-bindgen/blob/master/README.md
-[design]: https://github.com/rustwasm/wasm-bindgen/blob/master/DESIGN.md
-[contributing]: https://github.com/rustwasm/wasm-bindgen/blob/master/CONTRIBUTING.md
+[contributing]: https://rustwasm.github.io/wasm-bindgen/contributing.html
 [webidl-issues]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Afrontend%3Awebidl
 [more-types]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Amore-types
 [typescript-issues]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Afrontend%3Atypescript
