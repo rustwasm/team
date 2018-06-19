@@ -45,6 +45,11 @@ into `wasm-bindgen` development.
 
 We need help with:
 
+* Exposing the ECMAScript standard's global functions and objects in the
+  `wasm_bindgen::js` module. This is a great way to start with `wasm-bindgen`
+  and there is lots of work that can be done in concurrent pull requests from
+  various contributors! [Check out the meta issue for more details.][js-globals]
+
 * The WebIDL frontend to `wasm-bindgen`.
 
   * All DOM and Web APIs are described in WebIDL in their standards, and
@@ -83,3 +88,4 @@ We need help with:
 [webidl-issues]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Afrontend%3Awebidl
 [more-types]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Amore-types
 [typescript-issues]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Afrontend%3Atypescript
+[js-globals]: https://github.com/rustwasm/wasm-bindgen/issues/275
