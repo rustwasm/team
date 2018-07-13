@@ -50,5 +50,5 @@ and compelling demo programs for the interactive playground. [Open issues on the
 `rustwasm/team` repository for brainstorming and proposing such programs.][open]
 
 [vision]: https://github.com/rustwasm/team/blob/master/README.md#vision
-[wubwubwub]: https://github.com/rust-lang/wubwub
+[wubwub]: https://github.com/rust-lang/wubwub
 [open]: https://github.com/rustwasm/team/issues/new
