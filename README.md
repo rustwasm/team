@@ -79,9 +79,9 @@ Say "hello" and introduce yourself!
 
 ## 2. Do some Rust and WebAssembly Yourself
 
-Read our short [Rust and WebAssembly book][book], complete its [tutorials][],
-and compile some Rust into WebAssembly. If you run into a paper cut or
-roadblock, [let us know by filing an issue!][file-issue-book]
+Read our short [Rust and WebAssembly book][book], complete its [tutorial][], and
+compile some Rust into WebAssembly. If you run into a paper cut or roadblock,
+[let us know by filing an issue!][file-issue-book]
 
 ## 3. Join the Rust and WebAssembly Working Group
 
@@ -135,7 +135,7 @@ for information on becoming an official member of the working group!
 [meetings]: https://github.com/issues?utf8=%E2%9C%93&q=user%3Arustwasm+label%3Ameeting+
 [membership]: https://github.com/rustwasm/team/blob/master/GOVERNANCE.md#membership
 [book]: https://rustwasm.github.io/book
-[tutorials]: https://rustwasm.github.io/book/tutorials.html
+[tutorial]: https://rustwasm.github.io/book/game-of-life/introduction.html
 [irc]: irc://irc.mozilla.org#rust-wasm
 [irc-web-client]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
 [file-issue]: https://github.com/rustwasm/team/issues/new
