@@ -101,7 +101,7 @@ where:
 * A Web application is written in pure Rust, without integrating with any
   JavaScript.
 
-We meet on Google Hangouts every two weeks to track progress, give status
+We meet on Google Hangouts every week to track progress, give status
 updates, and discuss issues. We coordinate meetings with [issues labeled
 "meeting" in the `rustwasm/team` repository][meetings].
 
