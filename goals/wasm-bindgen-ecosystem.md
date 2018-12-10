@@ -81,7 +81,7 @@ We need help with:
 
 [host-bindings]: https://github.com/WebAssembly/host-bindings/blob/master/proposals/host-bindings/Overview.md
 [wasm-bindgen]: https://github.com/rustwasm/wasm-bindgen
-[contributing]: https://rustwasm.github.io/wasm-bindgen/contributing.html
+[contributing]: https://rustwasm.github.io/wasm-bindgen/contributing/
 [webidl-issues]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Afrontend%3Awebidl
 [more-types]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Amore-types
 [typescript-issues]: https://github.com/rustwasm/wasm-bindgen/issues?q=is%3Aissue+is%3Aopen+label%3Afrontend%3Atypescript
