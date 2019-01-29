@@ -5,75 +5,15 @@
 This repository is a simple, organic means of coordinating work on using Rust
 and WebAssembly together.
 
-<!--
-doctoc README.md --maxlevel 1
--->
-
-<!-- Generated with https://github.com/thlorenz/doctoc -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [Vision](#vision)
-- [Get Involved!](#get-involved)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Vision
-
-**Compiling Rust to WebAssembly should be *the* best choice for fast code for
-the Web.**
-
-JavaScript Web applications struggle to attain reliable performance.
-JavaScript's dynamic type system and garbage collection pauses don't
-help. Seemingly small code changes can result in drastic performance regressions
-if you accidentally wander off the JIT's happy path.
-
-Rust gives programmers low-level control and reliable performance. It is free
-from the non-deterministic garbage collection pauses that plague JavaScript.
-Programmers have control over indirection, monomorphization, and memory layout.
-
-And now we can bring Rust's advantages to the Web with WebAssembly.
-
-**Rust is particularly well-suited for the Web.**
-
-Rust's minuscule runtime enables small `.wasm` sizes and incremental or partial
-adoption.
-
-* Small `.wasm` sizes: Code size is incredibly important since the `.wasm` must
-be downloaded over the network.
-
-* Incremental or partial adoption: Existing code bases don't need to be thrown
-away. Programmers can start by porting their most performance-sensitive
-JavaScript functions to Rust to gain immediate benefits. And they can even stop
-there if they want to, because Rust plays well with others.
-
-Furthermore, Rust has many of the amenities that Web developers have come to
-expect:
-
-* strong package management with `cargo`,
-
-* expressive (and zero-cost!) abstractions,
-
-* and a welcoming community 😊
-
-We envision the pipeline that fits Rust into JavaScript package management and
-bundler ecosystem to look something like this:
-
-<img alt="Rust to WebAssembly to NPM to bundler to Webpage pipeline" src="./pipeline.png"/>
-
 # Get Involved!
 
 Get involved with the Rust and WebAssembly community in just **three easy
 steps!**
 
-## 1. Join our IRC Chat
+## 1. Join our Chat
 
-Chat with the Rust and WebAssembly community on IRC at [`#rust-wasm` on
-`irc.mozilla.org`][irc].
-
-If you don't have an IRC client of choice already, you can use the [Mibbit Web
-IRC client][irc-web-client].
+Chat with the Rust and WebAssembly community in [the `#wg-wasm` channel of
+the Rust project's Discord server.][discord].
 
 Say "hello" and introduce yourself!
 
@@ -137,6 +77,7 @@ for information on becoming an official member of the working group!
 [book]: https://rustwasm.github.io/book
 [tutorial]: https://rustwasm.github.io/book/game-of-life/introduction.html
 [irc]: irc://irc.mozilla.org#rust-wasm
+[discord]: https://discordapp.com/channels/442252698964721669/443151097398296587
 [irc-web-client]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
 [file-issue]: https://github.com/rustwasm/team/issues/new
 [file-issue-book]: https://github.com/rustwasm/book/issues/new
