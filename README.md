@@ -36,7 +36,7 @@ We are not focusing on (but still encourage others to experiment with) scenarios
 where:
 
 * The Web is not the primary target (e.g. WebAssembly as a universal binary
-  format, or an operating system that runs WebAsssembly processes instead of
+  format, or an operating system that runs WebAssembly processes instead of
   native code).
 * A Web application is written in pure Rust, without integrating with any
   JavaScript.
