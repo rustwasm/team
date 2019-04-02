@@ -41,15 +41,14 @@ the `@rustwasm/core` team may act as a tie-breaker.
 The core team manages the vision and navigates the future for the overall
 `rustwasm` organization.
 
-### [`@rustwasm/book`][book-team]
+### [`@rustwasm/wasm-pack`][wasmpack-team]
 
-The book team manages the Rust and WebAssembly book, tutorials, and
-documentation.
+The `wasm-pack` team is made up of frequent contributors to `wasm-pack`. It
+is led by [ashleygwilliams] and [drager].
 
-Repositories within the book team's domain:
-
-* `rustwasm/book`
-* `rustwasm/wasm_game_of_life`
+[wasmpack-team](https://github.com/orgs/rustwasm/teams/wasm-pack)
+[ashleygwilliams]: https://github.com/ashleygwilliams
+[drager]: https://github.com/drager
 
 ### Creating New Teams
 
