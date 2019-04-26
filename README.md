@@ -77,7 +77,7 @@ for information on becoming an official member of the working group!
 [book]: https://rustwasm.github.io/book
 [tutorial]: https://rustwasm.github.io/book/game-of-life/introduction.html
 [irc]: irc://irc.mozilla.org#rust-wasm
-[discord]: https://discordapp.com/channels/442252698964721669/443151097398296587
+[discord]: https://discord.gg/hBjKfhP
 [irc-web-client]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
 [file-issue]: https://github.com/rustwasm/team/issues/new
 [file-issue-book]: https://github.com/rustwasm/book/issues/new
