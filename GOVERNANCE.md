@@ -46,7 +46,7 @@ The core team manages the vision and navigates the future for the overall
 The `wasm-pack` team is made up of frequent contributors to `wasm-pack`. It
 is led by [ashleygwilliams] and [drager].
 
-[wasmpack-team](https://github.com/orgs/rustwasm/teams/wasm-pack)
+[wasmpack-team]: https://github.com/orgs/rustwasm/teams/wasm-pack
 [ashleygwilliams]: https://github.com/ashleygwilliams
 [drager]: https://github.com/drager
 

@@ -13,7 +13,7 @@ steps!**
 ## 1. Join our Chat
 
 Chat with the Rust and WebAssembly community in [the `#wg-wasm` channel of
-the Rust project's Discord server.][discord].
+the Rust project's Discord server][discord].
 
 Say "hello" and introduce yourself!
 
@@ -41,7 +41,7 @@ where:
 * A Web application is written in pure Rust, without integrating with any
   JavaScript.
 
-We meet on Google Hangouts every week to track progress, give status
+We meet on [Zoom](https://zoom.us/) every week to track progress, give status
 updates, and discuss issues. We coordinate meetings with [issues labeled
 "meeting" in the `rustwasm/team` repository][meetings].
 
