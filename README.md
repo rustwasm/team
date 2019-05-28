@@ -25,8 +25,7 @@ steps!**
 
 ### 1. Join our Chat
 
-Chat with the Rust and WebAssembly community in [the `#wg-wasm` channel of
-the Rust project's Discord server][discord].
+Join the [Rust project's Discord server][rust-discord] and chat with the Rust and WebAssembly community in the [`#wg-wasm` channel][wasm-discord].
 
 Say "hello" and introduce yourself!
 
@@ -51,7 +50,7 @@ First, get your feet wet by tackling one of these issues:
 Next, take a look at [our 2019 roadmap][roadmap] to get a grasp on our goals for
 the year, and see where you might be able to lend a hand. Unsure how to help
 with a project or who to reach out to for a specific project? Ask in [our
-chat][discord] and someone will point you in the right direction :)
+chat][wasm-discord] and someone will point you in the right direction :)
 
 Finally, if you've gotten this far, see [`GOVERNANCE.md#membership`][membership]
 for information on becoming an official member of the working group!
@@ -63,7 +62,8 @@ for information on becoming an official member of the working group!
 [book]: https://rustwasm.github.io/book
 [tutorial]: https://rustwasm.github.io/book/game-of-life/introduction.html
 [irc]: irc://irc.mozilla.org#rust-wasm
-[discord]: https://discordapp.com/channels/442252698964721669/443151097398296587
+[rust-discord]: https://discordapp.com/invite/rust-lang
+[wasm-discord]: https://discordapp.com/channels/442252698964721669/443151097398296587
 [irc-web-client]: https://client00.chat.mibbit.com/?channel=%23rust-wasm&server=irc.mozilla.org
 [file-issue]: https://github.com/rustwasm/team/issues/new
 [file-issue-book]: https://github.com/rustwasm/book/issues/new
