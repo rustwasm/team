@@ -37,7 +37,7 @@ compile some Rust into WebAssembly. If you run into a paper cut or roadblock,
 
 ### 3. Join the Rust and WebAssembly Working Group
 
-We meet on [Zoom](https://zoom.us/) every week to track progress, give status
+We meet on [Zoom](https://zoom.us/) every other week to track progress, give status
 updates, and discuss issues. We coordinate meetings with [issues labeled
 "meeting" in the `rustwasm/team` repository][meetings].
 
