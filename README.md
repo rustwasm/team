@@ -6,8 +6,6 @@
 
   <h3>
     <a href="#get-involved">Get Involved</a>
-    <span> | </span>
-    <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
   </h3>
 
   <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
@@ -25,7 +23,7 @@ steps!**
 
 ### 1. Join our Chat
 
-Join the [Rust project's Discord server][rust-discord] and chat with the Rust and WebAssembly community in the [`#wg-wasm` channel][wasm-discord].
+Join the [Rust project's Discord server][rust-discord] and chat with the Rust and WebAssembly community in the `#wg-wasm` channel.
 
 Say "hello" and introduce yourself!
 
