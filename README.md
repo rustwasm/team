@@ -1,3 +1,8 @@
+> **Note**: This repository and organization are archived and this is [no longer
+> where activity for Rust and
+> WebAssembly](https://blog.rust-lang.org/inside-rust/2025/07/21/sunsetting-the-rustwasm-github-org/)
+> is happening.
+
 <div align="center">
 
   <h1>Rust + WebAssembly = 💖</h1>
